@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="stadt_anzeige">
+        <item>München</item>
+        <item>Berlin</item>
+        <item>Bielefeld</item>
+        <item>Gütersloh</item>
+        <item>Paderborn</item>
+    </array>
+
+    <array name="stadt_werte">
+        <item>muenchen</item>
+        <item>berlin</item>
+        <item>bielefeld</item>
+        <item>guetersloh</item>
+        <item>paderborn</item>
+
+    </array>
+
+    <array name="anz_personen">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </array>
+
+    <array name="anz_betten">
+        <item>Einzel</item>
+        <item>Doppel</item>
+        <item>Familienzimmer</item>
+
+    </array>
+
+    <array name="zimmerart">
+        <item>Standard</item>
+        <item>Komfort</item>
+        <item>Superior</item>
+
+    </array>
+
+</resources>
