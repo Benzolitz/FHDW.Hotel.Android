@@ -1,37 +1,22 @@
 package fhdw.hotel;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-public class PrototypeSuchform extends AppCompatActivity {
+public class zimmer_detail extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prototype_suchform);
-
-        Button searchBtn = (Button) findViewById(R.id.search);
-
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PrototypeSuchform.this, ZimmerListe.class);
-                startActivity(intent);
-            }
-        });
+        setContentView(R.layout.activity_zimmer_detail);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_prototype_suchform, menu);
-
-
+        getMenuInflater().inflate(R.menu.menu_zimmer_detail, menu);
         return true;
     }
 
@@ -49,5 +34,4 @@ public class PrototypeSuchform extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

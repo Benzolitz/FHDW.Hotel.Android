@@ -6,4 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="endDate">Abreisedatum</string>
     <string name="startDate">Anreise</string>
+    <string name="title_activity_zimmer_liste">ZimmerListe</string>
+    <string name="title_activity_zimmer_detail">zimmer_detail</string>
 </resources>

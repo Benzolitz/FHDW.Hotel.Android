@@ -76,11 +76,13 @@
             android:entries="@array/zimmerart"
             android:entryValues="@array/zimmerart"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/txt_suchen"
-            android:id="@+id/search" />
-
     </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_suchen"
+        android:id="@+id/search"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
