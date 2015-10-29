@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fhdw.hotel" >
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,11 +16,6 @@
         <activity
             android:name=".PrototypeSuchform"
             android:label="@string/title_activity_prototype_suchform" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ZimmerListe"
@@ -24,6 +24,25 @@
         <activity
             android:name=".zimmer_detail"
             android:label="@string/title_activity_zimmer_detail" >
+        </activity>
+        <activity
+            android:name=".AccordeonZimmer"
+            android:label="@string/title_activity_accordeon_zimmer"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login" >
+
+        </activity>
+        <activity android:name=".RegisterActivity"
+            android:label="@string/title_activity_register">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

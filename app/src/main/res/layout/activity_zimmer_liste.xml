@@ -1,5 +1,4 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/zimmer_liste"
@@ -16,11 +15,11 @@
 
 
     <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
         android:choiceMode="singleChoice"
-        android:entries="@array/lst_zimmer"
-        />
+        android:entries="@array/lst_zimmer" />
+
 </LinearLayout>
 
