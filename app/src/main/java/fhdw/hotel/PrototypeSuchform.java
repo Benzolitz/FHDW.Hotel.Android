@@ -38,28 +38,28 @@ public class PrototypeSuchform extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Button alertDialog = (Button)findViewById(R.id.alertDialogBtn);
-        alertDialog.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                showDialog(DIALOG_ALERT);
-            }
-        });
+//        Button alertDialog = (Button)findViewById(R.id.alertDialogBtn);
+//        alertDialog.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                showDialog(DIALOG_ALERT);
+//            }
+//        });
     }
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case DIALOG_ALERT:
-                Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Bestätigen sie ihre Auswahl \n\n 4 Personen\n\n 1 Doppelzimmer Suite \n\n 2 Einzelzimmer Standard");
-                builder.setCancelable(true);
-                builder.setPositiveButton("Das passt", new OkOnClickListener());
-                builder.setNegativeButton("Passt nicht", new CancelOnClickListener());
-                AlertDialog dialog = builder.create();
-                dialog.show();
-        }
-        return super.onCreateDialog(id);
-    }
+//    @Override
+//    protected Dialog onCreateDialog(int id) {
+//        switch (id) {
+//            case DIALOG_ALERT:
+//                Builder builder = new AlertDialog.Builder(this);
+//                builder.setMessage("Bestätigen sie ihre Auswahl \n\n 4 Personen\n\n 1 Doppelzimmer Suite \n\n 2 Einzelzimmer Standard");
+//                builder.setCancelable(true);
+//                builder.setPositiveButton("Das passt", new OkOnClickListener());
+//                builder.setNegativeButton("Passt nicht", new CancelOnClickListener());
+//                AlertDialog dialog = builder.create();
+//                dialog.show();
+//        }
+//        return super.onCreateDialog(id);
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
