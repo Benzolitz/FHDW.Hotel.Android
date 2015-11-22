@@ -31,4 +31,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="hello">Hello World, HelloAccordion_JAVA!</string>
+    <!--<string name="app_name">HelloAccordion_JAVA</string>-->
+
+    <color name="white">#ffffffff</color>
+<color name="black">#ff000000</color>
+
 </resources>

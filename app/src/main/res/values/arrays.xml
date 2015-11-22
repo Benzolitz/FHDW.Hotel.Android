@@ -52,4 +52,20 @@
         <item>Zimmer 5 - 2p   29,80€ p.N.</item>
     </string-array>
 
+    <string-array name="faqs_header">
+        <item>Zimmer 1</item>
+        <item>Zimmer 2</item>
+        <item>Zimmer 3</item>
+        <item>Zimmer 4</item>
+        <item>Zimmer 5</item>
+    </string-array>
+
+    <string-array name="faqs_detail">
+        <item>Zimmer 1 - 2p   30€ p.N.</item>
+        <item>Zimmer 2 - 2p   35,50€ p.N.</item>
+        <item>Zimmer 3 - 2p   32,40€ p.N.</item>
+        <item>Zimmer 4 - 2p   34,60€ p.N.</item>
+        <item>Zimmer 5 - 2p   29,80€ p.N.</item>
+    </string-array>
+
 </resources>
