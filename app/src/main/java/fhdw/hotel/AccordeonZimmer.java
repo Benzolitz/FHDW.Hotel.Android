@@ -93,7 +93,7 @@ public class AccordeonZimmer extends Activity {
                                 /*Change the color of text to check later wether a tab is opened or closed*/
                                 button.setTextColor(getResources().getColor(R.color.white));
 
-                                parent.getChildAt(j + 1).setVisibility(parent.getChildAt(j + 1).VISIBLE);
+                                parent.getChildAt(j).setVisibility(View.VISIBLE);
 
                                 /*Icon for arrow right / down*/
 //                                button.setCompoundDrawablesWithIntrinsicBounds(
@@ -110,7 +110,7 @@ public class AccordeonZimmer extends Activity {
 
                                 /*Color changing like above*/
                                 button.setTextColor(getResources().getColor(R.color.black));
-                                parent.getChildAt(j + 1).setVisibility(parent.getChildAt(j + 1).GONE);
+                                parent.getChildAt(j + 1).setVisibility(View.GONE);
 
                                     /*Chenge the icon like above*/
 //                                button.setCompoundDrawablesWithIntrinsicBounds(
