@@ -11,10 +11,18 @@
     <string name="zimmerauswahl">Zimmerauswahl</string>
     <string name="einzelzimmer">Einzel</string>
     <string name="doppelzimmer">Doppel</string>
-    <string name="familienzimmer">Familie.</string>
+    <string name="familienzimmer">Familie(4 +1 Betten)</string>
     <string name="title_activity_accordeon_zimmer">AccordeonZimmer</string>
     <string name="title_activity_login">Einloggen</string>
     <string name="title_activity_register">Registrieren</string>
+
+
+
+    <string name="standardZimmer">Standard</string>
+    <string name="comfortZimmer">Comfort</string>
+    <string name="luxusZimmer">Luxus</string>
+
+
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

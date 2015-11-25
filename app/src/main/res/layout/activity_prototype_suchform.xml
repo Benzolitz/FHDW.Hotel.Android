@@ -108,14 +108,15 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="@string/einzelzimmer"
-                        android:id="@+id/textView5" />
+                        android:id="@+id/textView5"
+                        android:labelFor="@+id/einzelZimmer" />
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:ems="10"
-                        android:id="@+id/editText"
+                        android:id="@+id/einzelZimmer"
                         android:layout_column="4" />
                 </TableRow>
 
@@ -128,14 +129,15 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="@string/doppelzimmer"
-                        android:id="@+id/textView6" />
+                        android:id="@+id/textView6"
+                        android:labelFor="@+id/doppelZimmer"/>
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:ems="10"
-                        android:id="@+id/editText2"
+                        android:id="@+id/doppelZimmer"
                         android:layout_column="4" />
 
                 </TableRow>
@@ -149,6 +151,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="@string/familienzimmer"
+                        android:labelFor="@+id/famZimmer"
                         android:id="@+id/textView7" />
 
                     <EditText
@@ -156,7 +159,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:ems="10"
-                        android:id="@+id/editText3"
+                        android:id="@+id/famZimmer"
                         android:layout_column="4" />
                 </TableRow>
 

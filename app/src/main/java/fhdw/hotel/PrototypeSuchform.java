@@ -10,19 +10,21 @@ import android.view.View;
 import android.widget.Button;
 
 
-
 import android.app.AlertDialog;
 
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 
+import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 
 
 public class PrototypeSuchform extends AppCompatActivity {
 
     private static final int DIALOG_ALERT = 10;
+    ArrayList<Zimmer> zimmerArten = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,40 @@ public class PrototypeSuchform extends AppCompatActivity {
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                /**
+                 * vorläufig mit statischen werten
+                 * */
+                Zimmer einzelZimmer;
+                Zimmer doppelZimmer;
+                Zimmer famZimmer;
+
+                EditText txtEinzel = (EditText) findViewById(R.id.einzelZimmer);
+                EditText txtDoppel = (EditText) findViewById(R.id.doppelZimmer);
+                EditText txtFam = (EditText) findViewById(R.id.famZimmer);
+
+                int anzEinzel = Integer.parseInt(txtEinzel.getText().toString());
+                int anzDoppel = Integer.parseInt(txtDoppel.getText().toString());
+                int anzFam = Integer.parseInt(txtFam.getText().toString());
+
+                for (int i = 0; i < anzEinzel; i++) {
+                    einzelZimmer = new Zimmer("Einzelzimmer");
+                    zimmerArten.add(i, einzelZimmer);
+                }
+
+                for (int i = 0; i < anzDoppel; i++) {
+                    doppelZimmer = new Zimmer("Doppelzimmer");
+                    zimmerArten.add(i, doppelZimmer);
+                }
+
+                for (int i = 0; i < anzFam; i++) {
+                    famZimmer = new Zimmer("Familienzimmer");
+                    zimmerArten.add(i, famZimmer);
+                }
+
+
                 Intent intent = new Intent(PrototypeSuchform.this, AccordeonZimmer.class);
+                intent.putExtra("allRooms", zimmerArten);
                 startActivity(intent);
             }
         });
@@ -84,6 +119,7 @@ public class PrototypeSuchform extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     private final class CancelOnClickListener implements
             DialogInterface.OnClickListener {
         public void onClick(DialogInterface dialog, int which) {
