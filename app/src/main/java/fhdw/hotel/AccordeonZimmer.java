@@ -60,17 +60,13 @@ public class AccordeonZimmer extends Activity {
             standard.setText(R.string.standardZimmer);
             rg.addView(standard);
 
-
             comfort.setText(R.string.comfortZimmer);
             rg.addView(comfort);
 
             luxus.setText(R.string.luxusZimmer);
             rg.addView(luxus);
 
-
-
             ll.addView(rg);
-
 
             b1.setTypeface(null, 1);
 
