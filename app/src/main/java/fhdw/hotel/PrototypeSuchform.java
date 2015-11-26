@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -58,9 +59,6 @@ public class PrototypeSuchform extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(View v) {
 
-                /**
-                 * vorläufig mit statischen werten
-                 * */
                 ArrayList<Zimmer> zimmerArten = new ArrayList<>();
                 Zimmer einzelZimmer;
                 Zimmer doppelZimmer;
@@ -89,24 +87,21 @@ public class PrototypeSuchform extends AppCompatActivity implements View.OnClick
                     zimmerArten.add(i, famZimmer);
                 }
 
-
                 Intent intent = new Intent(PrototypeSuchform.this, AccordeonZimmer.class);
-//                intent.removeExtra("allRooms");
                 intent.putExtra("allRooms", zimmerArten);
                 startActivity(intent);
             }
         });
-
     }
 
-private void findViewsById() {
-    fromDateEtxt = (EditText) findViewById(R.id.inputStartDate);
-    fromDateEtxt.setInputType(InputType.TYPE_NULL);
-    fromDateEtxt.requestFocus();
+    private void findViewsById() {
+        fromDateEtxt = (EditText) findViewById(R.id.inputStartDate);
+        fromDateEtxt.setInputType(InputType.TYPE_NULL);
+        fromDateEtxt.requestFocus();
 
-    toDateEtxt = (EditText) findViewById(R.id.inputEndDate);
-    toDateEtxt.setInputType(InputType.TYPE_NULL);
-}
+        toDateEtxt = (EditText) findViewById(R.id.inputEndDate);
+        toDateEtxt.setInputType(InputType.TYPE_NULL);
+    }
 
     private void setDateTimeField() {
         fromDateEtxt.setOnClickListener(this);
@@ -121,7 +116,7 @@ private void findViewsById() {
                 fromDateEtxt.setText(dateFormatter.format(newDate.getTime()));
             }
 
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
         toDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
@@ -131,8 +126,9 @@ private void findViewsById() {
                 toDateEtxt.setText(dateFormatter.format(newDate.getTime()));
             }
 
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -158,11 +154,10 @@ private void findViewsById() {
     }
 
 
-
     public void onClick(View view) {
-        if(view == fromDateEtxt) {
+        if (view == fromDateEtxt) {
             fromDatePickerDialog.show();
-        } else if(view == toDateEtxt) {
+        } else if (view == toDateEtxt) {
             toDatePickerDialog.show();
         }
     }

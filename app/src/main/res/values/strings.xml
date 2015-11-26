@@ -24,6 +24,20 @@
 
 
 
+    <string name="bookingHeader">Hinterlegen sie bitte ihre Daten für die Buchung.</string>
+    <string name="bookingTitle">Ihre Buchung</string>
+    <string name="prompt_firstname">Vorname</string>
+    <string name="prompt_lastname">Nachname</string>
+    <string name="prompt_birthdate">Geburtsdatum</string>
+    <string name="prompt_street">Straße, Haus Nr.</string>
+    <string name="prompt_plz">PLZ</string>
+    <string name="prompt_city">Ort</string>
+
+
+
+
+
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Passwort</string>
@@ -31,6 +45,7 @@
     <string name="action_sign_in">Einloggen</string>
     <string name="action_sign_in_short">Einloggen</string>
     <string name="action_register">Registrieren</string>
+    <string name="action_book">Buchen</string>
 
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
