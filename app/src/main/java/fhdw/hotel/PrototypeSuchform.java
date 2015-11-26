@@ -30,7 +30,7 @@ import java.util.Locale;
 public class PrototypeSuchform extends AppCompatActivity implements View.OnClickListener {
 
     private static final int DIALOG_ALERT = 10;
-    ArrayList<Zimmer> zimmerArten = new ArrayList<>();
+
     private DatePickerDialog fromDatePickerDialog;
     private DatePickerDialog toDatePickerDialog;
     private EditText fromDateEtxt;
@@ -61,6 +61,7 @@ public class PrototypeSuchform extends AppCompatActivity implements View.OnClick
                 /**
                  * vorläufig mit statischen werten
                  * */
+                ArrayList<Zimmer> zimmerArten = new ArrayList<>();
                 Zimmer einzelZimmer;
                 Zimmer doppelZimmer;
                 Zimmer famZimmer;
