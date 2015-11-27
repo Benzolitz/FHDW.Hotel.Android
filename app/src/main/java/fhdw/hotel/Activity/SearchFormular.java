@@ -1,22 +1,15 @@
-package fhdw.hotel;
+package fhdw.hotel.Activity;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-
-import android.app.AlertDialog;
-
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
 
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -27,8 +20,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+import fhdw.hotel.BLL.HotelService;
+import fhdw.hotel.DomainModel.*;
+import fhdw.hotel.R;
 
-public class PrototypeSuchform extends AppCompatActivity implements View.OnClickListener {
+
+public class SearchFormular extends AppCompatActivity implements View.OnClickListener, IAsyncTaskCompleteListener<Hotel> {
 
     private static final int DIALOG_ALERT = 10;
 
@@ -40,13 +37,18 @@ public class PrototypeSuchform extends AppCompatActivity implements View.OnClick
 
     private SimpleDateFormat dateFormatter;
 
+    private HotelService hotelService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        hotelService = new HotelService();
+
+
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_prototype_suchform);
+        setContentView(R.layout.activity_search_formular);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.GERMANY);
 
         findViewsById();
@@ -59,10 +61,10 @@ public class PrototypeSuchform extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(View v) {
 
-                ArrayList<Zimmer> zimmerArten = new ArrayList<>();
-                Zimmer einzelZimmer;
-                Zimmer doppelZimmer;
-                Zimmer famZimmer;
+                ArrayList<Room> zimmerArten = new ArrayList<>();
+                Room einzelZimmer;
+                Room doppelZimmer;
+                Room famZimmer;
 
                 EditText txtEinzel = (EditText) findViewById(R.id.einzelZimmer);
                 EditText txtDoppel = (EditText) findViewById(R.id.doppelZimmer);
@@ -73,21 +75,21 @@ public class PrototypeSuchform extends AppCompatActivity implements View.OnClick
                 int anzFam = Integer.parseInt(txtFam.getText().toString());
 
                 for (int i = 0; i < anzEinzel; i++) {
-                    einzelZimmer = new Zimmer("Einzelzimmer");
+                    einzelZimmer = new Room("Einzelzimmer");
                     zimmerArten.add(i, einzelZimmer);
                 }
 
                 for (int i = 0; i < anzDoppel; i++) {
-                    doppelZimmer = new Zimmer("Doppelzimmer");
+                    doppelZimmer = new Room("Doppelzimmer");
                     zimmerArten.add(i, doppelZimmer);
                 }
 
                 for (int i = 0; i < anzFam; i++) {
-                    famZimmer = new Zimmer("Familienzimmer");
+                    famZimmer = new Room("Familienzimmer");
                     zimmerArten.add(i, famZimmer);
                 }
 
-                Intent intent = new Intent(PrototypeSuchform.this, AccordeonZimmer.class);
+                Intent intent = new Intent(SearchFormular.this, RoomSelection.class);
                 intent.putExtra("allRooms", zimmerArten);
                 startActivity(intent);
             }
@@ -153,12 +155,16 @@ public class PrototypeSuchform extends AppCompatActivity implements View.OnClick
         return super.onOptionsItemSelected(item);
     }
 
-
     public void onClick(View view) {
         if (view == fromDateEtxt) {
             fromDatePickerDialog.show();
         } else if (view == toDateEtxt) {
             toDatePickerDialog.show();
         }
+    }
+
+    @Override
+    public void onTaskComplete(Hotel result) {
+
     }
 }

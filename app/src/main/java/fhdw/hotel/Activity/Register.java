@@ -1,9 +1,11 @@
-package fhdw.hotel;
+package fhdw.hotel.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class RegisterActivity extends AppCompatActivity {
+import fhdw.hotel.R;
+
+public class Register extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

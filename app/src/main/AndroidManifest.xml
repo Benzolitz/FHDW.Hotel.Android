@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".PrototypeSuchform"
+            android:name=".Activity.SearchFormular"
             android:label="@string/title_activity_prototype_suchform">
 
             <intent-filter>
@@ -24,22 +24,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ZimmerListe"
-            android:label="@string/title_activity_zimmer_liste"></activity>
-        <activity
-            android:name=".zimmer_detail"
-            android:label="@string/title_activity_zimmer_detail"></activity>
-        <activity
-            android:name=".AccordeonZimmer"
+            android:name=".Activity.RoomSelection"
             android:label="@string/title_activity_accordeon_zimmer"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.Login"
             android:label="@string/title_activity_login">
 
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Activity.Register"
             android:label="@string/title_activity_register">
 
         </activity>

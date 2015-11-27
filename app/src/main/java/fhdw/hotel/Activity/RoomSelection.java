@@ -1,4 +1,4 @@
-package fhdw.hotel;
+package fhdw.hotel.Activity;
 
 
 import android.app.Activity;
@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -17,17 +16,21 @@ import android.widget.TableLayout;
 
 import java.util.ArrayList;
 
-public class AccordeonZimmer extends Activity {
+import fhdw.hotel.DomainModel.Room;
+import fhdw.hotel.R;
+
+public class RoomSelection extends Activity {
 
     LinearLayout rooms;
-    ArrayList<Zimmer> allRooms = new ArrayList<>();
+    ArrayList<Room> allRooms = new ArrayList<>();
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_accordeon_zimmer);
+        setContentView(R.layout.content_room_selection);
         rooms = (LinearLayout) findViewById(R.id.linearLayoutRooms);
         Intent intent = getIntent();
-        allRooms = (ArrayList<Zimmer>) intent.getSerializableExtra("allRooms");
+        allRooms = (ArrayList<Room>) intent.getSerializableExtra("allRooms");
         fillRoomList();
     }
 
