@@ -3,7 +3,7 @@ package fhdw.hotel.BLL;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import fhdw.hotel.Activity.IAsyncTaskCompleteListener;
+import fhdw.hotel.Async.IAsyncTaskCompleteListener;
 import fhdw.hotel.DomainModel.Hotel;
 
 

@@ -8,7 +8,6 @@ import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 
 import android.widget.DatePicker;
@@ -20,131 +19,116 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-import fhdw.hotel.BLL.HotelService;
+import fhdw.hotel.Async.IAsyncTaskCompleteListener;
 import fhdw.hotel.DomainModel.*;
 import fhdw.hotel.R;
 
 
-public class SearchFormular extends AppCompatActivity implements View.OnClickListener, IAsyncTaskCompleteListener<Hotel> {
-
-    private static final int DIALOG_ALERT = 10;
-
-    private DatePickerDialog fromDatePickerDialog;
-    private DatePickerDialog toDatePickerDialog;
-    private EditText fromDateEtxt;
-    private EditText toDateEtxt;
-
-
+public class SearchFormular extends AppCompatActivity implements IAsyncTaskCompleteListener<Hotel> {
     private SimpleDateFormat dateFormatter;
 
-    private HotelService hotelService;
-
-
+    // region Initialization
+    /**
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        hotelService = new HotelService();
-
-
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_search_formular);
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.GERMANY);
 
-        findViewsById();
-
-        setDateTimeField();
-
-        Button searchBtn = (Button) findViewById(R.id.search);
-
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                ArrayList<Room> zimmerArten = new ArrayList<>();
-                Room einzelZimmer;
-                Room doppelZimmer;
-                Room famZimmer;
-
-                EditText txtEinzel = (EditText) findViewById(R.id.einzelZimmer);
-                EditText txtDoppel = (EditText) findViewById(R.id.doppelZimmer);
-                EditText txtFam = (EditText) findViewById(R.id.famZimmer);
-
-                int anzEinzel = Integer.parseInt(txtEinzel.getText().toString());
-                int anzDoppel = Integer.parseInt(txtDoppel.getText().toString());
-                int anzFam = Integer.parseInt(txtFam.getText().toString());
-
-                for (int i = 0; i < anzEinzel; i++) {
-                    einzelZimmer = new Room("Einzelzimmer");
-                    zimmerArten.add(i, einzelZimmer);
-                }
-
-                for (int i = 0; i < anzDoppel; i++) {
-                    doppelZimmer = new Room("Doppelzimmer");
-                    zimmerArten.add(i, doppelZimmer);
-                }
-
-                for (int i = 0; i < anzFam; i++) {
-                    famZimmer = new Room("Familienzimmer");
-                    zimmerArten.add(i, famZimmer);
-                }
-
-                Intent intent = new Intent(SearchFormular.this, RoomSelection.class);
-                intent.putExtra("allRooms", zimmerArten);
-                startActivity(intent);
-            }
-        });
+        dateFormatter = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
+        removeKeypadFromDatePicker();
     }
 
-    private void findViewsById() {
-        fromDateEtxt = (EditText) findViewById(R.id.inputStartDate);
-        fromDateEtxt.setInputType(InputType.TYPE_NULL);
-        fromDateEtxt.requestFocus();
+    /**
+     * Set Type of Date Text Boxes to NULL, otherwise the keyboard will open every time focus is set to the input fields.
+     */
+    private void removeKeypadFromDatePicker() {
+        EditText txtArrivalDate = (EditText) findViewById(R.id.txtArrivalDate);
+        EditText txtDepartureDate = (EditText) findViewById(R.id.txtDepartureDate);
 
-        toDateEtxt = (EditText) findViewById(R.id.inputEndDate);
-        toDateEtxt.setInputType(InputType.TYPE_NULL);
+        txtArrivalDate.setInputType(InputType.TYPE_NULL);
+        txtDepartureDate.setInputType(InputType.TYPE_NULL);
+    }
+    // endregion
+
+    // region onClickMethods
+    /**
+     * @param view
+     */
+    public void SearchRoomOnClick(View view) {
+        Intent intent = new Intent(SearchFormular.this, RoomSelection.class);
+
+        EditText txtSingleRoomCount = (EditText) findViewById(R.id.txtSingleRoomCount);
+        int singleRoomCount = Integer.parseInt(txtSingleRoomCount.getText().toString());
+        intent.putExtra("singleRoomCount", singleRoomCount);
+
+        EditText txtDoubleRoomCount = (EditText) findViewById(R.id.txtDoubleRoomCount);
+        int doubleRoomCount = Integer.parseInt(txtDoubleRoomCount.getText().toString());
+        intent.putExtra("doubleRoomCount", doubleRoomCount);
+
+        EditText txtFamilyRoomCount = (EditText) findViewById(R.id.txtFamilyRoomCount);
+        int familyRoomCount = Integer.parseInt(txtFamilyRoomCount.getText().toString());
+        intent.putExtra("familyRoomCount", familyRoomCount);
+
+        startActivity(intent);
     }
 
-    private void setDateTimeField() {
-        fromDateEtxt.setOnClickListener(this);
-        toDateEtxt.setOnClickListener(this);
+    /**
+     * Show the Datepicker and set the selected date into the arrival textbox.
+     * @param view
+     */
+    public void getArrivalDate(View view) {
+        showDatePicker((EditText) findViewById(R.id.txtArrivalDate));
+    }
 
-        Calendar newCalendar = Calendar.getInstance();
-        fromDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+    /**
+     * Show the Datepicker, check the date and set the selected date into the departure textbox.
+     * @param view
+     */
+    public void getDepartureDate(View view) {
+        showDatePicker((EditText) findViewById(R.id.txtDepartureDate));
+        // TODO: Check if DepartureDate is before ArrivalDate!
+    }
+    // endregion
 
+    // region HelperMethods
+    /**
+     * @param txtArrivalDate
+     */
+    private void showDatePicker(final EditText txtArrivalDate) {
+        Calendar calendar = Calendar.getInstance();
+        new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                fromDateEtxt.setText(dateFormatter.format(newDate.getTime()));
+                txtArrivalDate.setText(dateFormatter.format(newDate.getTime()));
             }
-
-        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-
-        toDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                toDateEtxt.setText(dateFormatter.format(newDate.getTime()));
-            }
-
-        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
+    // endregion
 
+    //region GUI-Methods
+    /**
+     * Inflate the menu; this adds items to the action bar if it is present.
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_prototype_suchform, menu);
-
 
         return true;
     }
 
+    /**
+     * Handle action bar item clicks here. The action bar will automatically handle clicks on the Home/Up button, so long as you specify a parent activity in AndroidManifest.xml.
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -154,17 +138,13 @@ public class SearchFormular extends AppCompatActivity implements View.OnClickLis
 
         return super.onOptionsItemSelected(item);
     }
+    //endregion
 
-    public void onClick(View view) {
-        if (view == fromDateEtxt) {
-            fromDatePickerDialog.show();
-        } else if (view == toDateEtxt) {
-            toDatePickerDialog.show();
-        }
-    }
-
+    // region Async-Helper
+    /**
+     * @param result
+     */
     @Override
-    public void onTaskComplete(Hotel result) {
-
-    }
+    public void onTaskComplete(Hotel result) { }
+    // endregion
 }

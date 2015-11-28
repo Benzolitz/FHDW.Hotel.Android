@@ -6,42 +6,28 @@ import java.io.Serializable;
  * Created by Artur Briem on 25.11.2015.
  */
 public class Room implements Serializable{
-    private int ID;
-    private String Type;
-    private String Category;
+    private int id;
+    private Enums.RoomType type;
+    private Enums.RoomCategory category;
 
-    public Room(int zid, String art, String typ)
-    {
-        super();
-        this.ID = zid;
-        this.Type = art;
-        this.Category = typ;
-    }
+    public Room() {}
 
-    public Room(String art)
+    public int getId()
     {
-        super();
-        this.Type = art;
+        return id;
     }
+    public void setId(int p_id) { this.id = p_id; }
 
-    public int getID()
+    public Enums.RoomType getType()
     {
-        return ID;
+        return type;
     }
+    public void setType(Enums.RoomType p_type){ type = p_type; }
 
-    public String getType()
+    public Enums.RoomCategory getCategory()
     {
-        return Type;
+        return category;
     }
-    public String getCategory()
-    {
-        return Category;
-    }
-
-    @Override
-    public String toString()
-    {
-        return Type;
-    }
-
+    public void setCategory(Enums.RoomCategory p_category){ category = p_category; }
 }
+

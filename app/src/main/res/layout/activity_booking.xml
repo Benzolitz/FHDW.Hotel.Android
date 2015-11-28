@@ -29,7 +29,7 @@
         android:layout_height="wrap_content">
 
         <AutoCompleteTextView
-            android:id="@+id/firstname"
+            android:id="@+id/txtFirstname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_firstname"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content">
 
         <AutoCompleteTextView
-            android:id="@+id/lastname"
+            android:id="@+id/txtLastname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_lastname"
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content">
 
         <AutoCompleteTextView
-            android:id="@+id/birthdate"
+            android:id="@+id/dtpBirthday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_birthdate"
@@ -71,10 +71,10 @@
         android:layout_height="wrap_content">
 
         <AutoCompleteTextView
-            android:id="@+id/street"
+            android:id="@+id/txtStreet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/prompt_street"
+            android:hint="Straße und Hausnummer"
             android:inputType="textPersonName"
             android:maxLines="1"
             android:singleLine="true" />
@@ -85,7 +85,7 @@
         android:layout_height="wrap_content">
 
         <AutoCompleteTextView
-            android:id="@+id/plz"
+            android:id="@+id/txtPostalcode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_plz"
@@ -99,7 +99,7 @@
         android:layout_height="wrap_content">
 
         <AutoCompleteTextView
-            android:id="@+id/city"
+            android:id="@+id/txtCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_city"
@@ -118,7 +118,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/action_book"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:onClick="StartBooking"/>
 
 
 </LinearLayout>

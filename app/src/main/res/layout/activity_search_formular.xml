@@ -25,12 +25,12 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Wählen sie ihre Zielstadt"
-                android:id="@+id/textView2" />
+                android:id="@+id/lblSelectDestinationCity" />
 
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/stadt_spinner"
+                android:id="@+id/spnCity"
                 android:entries="@array/stadt_anzeige"
                 android:entryValues="@array/stadt_werte"
                 android:layout_marginTop="10dp"
@@ -41,12 +41,12 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Wählen sie die anzahl der Personen (max. 10)"
-                android:id="@+id/textView" />
+                android:id="@+id/lblSelectPersonCount" />
 
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/personen_spinner"
+                android:id="@+id/spnPersonCount"
                 android:entries="@array/anz_personen"
                 android:entryValues="@array/anz_personen"
                 android:layout_marginTop="10dp"
@@ -57,8 +57,8 @@
                 android:layout_width="215dp"
                 android:layout_height="wrap_content"
                 android:text="@string/startDate"
-                android:id="@+id/startDate"
-                android:labelFor="@+id/inputStartDate"
+                android:id="@+id/lblArrivalDate"
+                android:labelFor="@+id/txtArrivalDate"
                 android:layout_marginTop="10px" />
 
 
@@ -68,15 +68,16 @@
                 android:layout_height="wrap_content"
                 android:inputType="date"
                 android:ems="10"
-                android:id="@+id/inputStartDate"
-                android:layout_marginTop="10px" />
+                android:id="@+id/txtArrivalDate"
+                android:layout_marginTop="10px"
+                android:onClick="getArrivalDate" />
 
             <TextView
                 android:layout_width="218dp"
                 android:layout_height="wrap_content"
                 android:text="@string/endDate"
-                android:id="@+id/endDate"
-                android:labelFor="@+id/inputEndDate"
+                android:id="@+id/lblDepartureDate"
+                android:labelFor="@+id/txtDepartureDate"
                 android:layout_marginTop="10dp" />
 
             <EditText
@@ -84,9 +85,10 @@
                 android:layout_height="wrap_content"
                 android:inputType="date"
                 android:ems="10"
-                android:id="@+id/inputEndDate"
+                android:id="@+id/txtDepartureDate"
                 android:layout_marginTop="10px"
-                android:layout_marginBottom="25dp" />
+                android:layout_marginBottom="25dp"
+                android:onClick="getDepartureDate" />
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -97,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/zimmerauswahl"
-                    android:id="@+id/textView4" />
+                    android:id="@+id/lblRoomSelection" />
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -108,15 +110,15 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="@string/einzelzimmer"
-                        android:id="@+id/textView5"
-                        android:labelFor="@+id/einzelZimmer" />
+                        android:id="@+id/lblSingleRoomSelection"
+                        android:labelFor="@+id/txtSingleRoomCount" />
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:ems="10"
-                        android:id="@+id/einzelZimmer"
+                        android:id="@+id/txtSingleRoomCount"
                         android:layout_column="4"
                         android:text="0"/>
                 </TableRow>
@@ -130,15 +132,15 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="@string/doppelzimmer"
-                        android:id="@+id/textView6"
-                        android:labelFor="@+id/doppelZimmer"/>
+                        android:id="@+id/lblDoubleRoomSelection"
+                        android:labelFor="@+id/txtDoubleRoomCount"/>
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:ems="10"
-                        android:id="@+id/doppelZimmer"
+                        android:id="@+id/txtDoubleRoomCount"
                         android:layout_column="4"
                         android:text="0"/>
 
@@ -153,24 +155,20 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="@string/familienzimmer"
-                        android:labelFor="@+id/famZimmer"
-                        android:id="@+id/textView7" />
+                        android:labelFor="@+id/txtFamilyRoomCount"
+                        android:id="@+id/lblFamilyRoomSelection" />
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:ems="10"
-                        android:id="@+id/famZimmer"
+                        android:id="@+id/txtFamilyRoomCount"
                         android:layout_column="4"
                         android:text="0"/>
                 </TableRow>
-
             </TableLayout>
-
-
         </LinearLayout>
-
 
         <Button
             android:layout_width="match_parent"
@@ -179,13 +177,8 @@
             android:id="@+id/search"
             android:layout_below="@+id/linearLayout"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="25dp" />
-
-        <!--<Button-->
-            <!--android:id="@+id/alertDialogBtn"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Alert Dialog" />-->
+            android:layout_marginTop="25dp"
+            android:onClick="SearchRoomOnClick"/>
     </RelativeLayout>
 
 </ScrollView>
