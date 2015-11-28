@@ -16,11 +16,14 @@ import android.widget.TableLayout;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import fhdw.hotel.BLL.Async.IListener.IAsyncHotelListener;
+import fhdw.hotel.BLL.Async.IListener.IAsyncRoomListener;
 import fhdw.hotel.DomainModel.Enums;
+import fhdw.hotel.DomainModel.Hotel;
 import fhdw.hotel.DomainModel.Room;
 import fhdw.hotel.R;
 
-public class RoomSelection extends Activity {
+public class RoomSelection extends Activity implements IAsyncRoomListener {
 
     LinearLayout rooms;
 
@@ -151,5 +154,15 @@ public class RoomSelection extends Activity {
         radGroupRoomType.addView(radSuperior);
 
         return radGroupRoomType;
+    }
+
+    @Override
+    public void GetCollectionComplete(ArrayList<Room> p_result) {
+
+    }
+
+    @Override
+    public void GetRoom(Room p_result) {
+
     }
 }

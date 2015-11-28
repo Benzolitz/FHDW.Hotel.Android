@@ -2,29 +2,27 @@ package fhdw.hotel.Activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-import fhdw.hotel.Async.IAsyncTaskCompleteListener;
-import fhdw.hotel.DomainModel.*;
+import fhdw.hotel.BLL.Async.IListener.IAsyncHotelListener;
+import fhdw.hotel.DomainModel.Hotel;
 import fhdw.hotel.R;
 
 
-public class SearchFormular extends AppCompatActivity implements IAsyncTaskCompleteListener<Hotel> {
+
+public class SearchFormular extends AppCompatActivity implements IAsyncHotelListener {
     private SimpleDateFormat dateFormatter;
 
     // region Initialization
@@ -39,6 +37,8 @@ public class SearchFormular extends AppCompatActivity implements IAsyncTaskCompl
 
         dateFormatter = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
         removeKeypadFromDatePicker();
+
+        getHotelCollection();
     }
 
     /**
@@ -140,11 +140,19 @@ public class SearchFormular extends AppCompatActivity implements IAsyncTaskCompl
     }
     //endregion
 
-    // region Async-Helper
-    /**
-     * @param result
-     */
+    // region Async-Methods
+    public void getHotelCollection() {
+        new fhdw.hotel.BLL.Async.Hotel.GetCollection(null, this).execute();
+    }
+
     @Override
-    public void onTaskComplete(Hotel result) { }
+    public void GetCollectionComplete(ArrayList<Hotel> p_result) {
+
+    }
+
+    @Override
+    public void GetComplete(Hotel p_result) {
+
+    }
     // endregion
 }
