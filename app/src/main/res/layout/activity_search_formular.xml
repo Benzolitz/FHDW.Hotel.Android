@@ -1,93 +1,99 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
+    android:layout_height="fill_parent">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
         tools:context="fhdw.hotel.Activity.SearchFormular">
 
 
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="1"
             android:layout_alignParentStart="true"
-            android:id="@+id/linearLayout">
+            android:orientation="vertical"
+            android:weightSum="1">
 
             <TextView
+                android:id="@+id/lblSelectDestinationCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Wählen sie ihre Zielstadt"
-                android:id="@+id/lblSelectDestinationCity" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <Spinner
+                android:id="@+id/spnCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spnCity"
+                android:layout_marginBottom="25dp"
+                android:layout_marginTop="10dp"
                 android:entries="@array/stadt_anzeige"
                 android:entryValues="@array/stadt_werte"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="25dp" />
+                android:focusable="true">
+
+                <requestFocus />
+            </Spinner>
 
             <TextView
+                android:id="@+id/lblSelectPersonCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Wählen sie die anzahl der Personen (max. 10)"
-                android:id="@+id/lblSelectPersonCount" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <Spinner
+                android:id="@+id/spnPersonCount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spnPersonCount"
-                android:entries="@array/anz_personen"
-                android:entryValues="@array/anz_personen"
+                android:layout_marginBottom="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="25dp" />
+                android:entries="@array/anz_personen"
+                android:entryValues="@array/anz_personen" />
 
 
             <TextView
+                android:id="@+id/lblArrivalDate"
                 android:layout_width="215dp"
                 android:layout_height="wrap_content"
-                android:text="@string/startDate"
-                android:id="@+id/lblArrivalDate"
+                android:layout_marginTop="10px"
                 android:labelFor="@+id/txtArrivalDate"
-                android:layout_marginTop="10px" />
-
+                android:text="@string/startDate" />
 
 
             <EditText
+                android:id="@+id/txtArrivalDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="date"
-                android:ems="10"
-                android:id="@+id/txtArrivalDate"
                 android:layout_marginTop="10px"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="date"
                 android:onClick="getArrivalDate" />
 
             <TextView
+                android:id="@+id/lblDepartureDate"
                 android:layout_width="218dp"
                 android:layout_height="wrap_content"
-                android:text="@string/endDate"
-                android:id="@+id/lblDepartureDate"
+                android:layout_marginTop="10dp"
                 android:labelFor="@+id/txtDepartureDate"
-                android:layout_marginTop="10dp" />
+                android:text="@string/endDate" />
 
             <EditText
+                android:id="@+id/txtDepartureDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="date"
-                android:ems="10"
-                android:id="@+id/txtDepartureDate"
-                android:layout_marginTop="10px"
                 android:layout_marginBottom="25dp"
+                android:layout_marginTop="10px"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="date"
                 android:onClick="getDepartureDate" />
 
             <TableLayout
@@ -95,31 +101,31 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/lblRoomSelection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/zimmerauswahl"
-                    android:id="@+id/lblRoomSelection" />
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:id="@+id/lblSingleRoomSelection"
                         android:layout_width="67dp"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:labelFor="@+id/txtSingleRoomCount"
                         android:text="@string/einzelzimmer"
-                        android:id="@+id/lblSingleRoomSelection"
-                        android:labelFor="@+id/txtSingleRoomCount" />
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:ems="10"
                         android:id="@+id/txtSingleRoomCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_column="4"
+                        android:ems="10"
+                        android:inputType="number"
                         android:text="0"/>
                 </TableRow>
 
@@ -128,20 +134,20 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="@string/doppelzimmer"
                         android:id="@+id/lblDoubleRoomSelection"
-                        android:labelFor="@+id/txtDoubleRoomCount"/>
-
-                    <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:ems="10"
+                        android:labelFor="@+id/txtDoubleRoomCount"
+                        android:text="@string/doppelzimmer"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <EditText
                         android:id="@+id/txtDoubleRoomCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_column="4"
+                        android:ems="10"
+                        android:inputType="number"
                         android:text="0"/>
 
                 </TableRow>
@@ -151,34 +157,34 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:id="@+id/lblFamilyRoomSelection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="@string/familienzimmer"
                         android:labelFor="@+id/txtFamilyRoomCount"
-                        android:id="@+id/lblFamilyRoomSelection" />
+                        android:text="@string/familienzimmer"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <EditText
+                        android:id="@+id/txtFamilyRoomCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:ems="10"
-                        android:id="@+id/txtFamilyRoomCount"
                         android:layout_column="4"
+                        android:ems="10"
+                        android:inputType="number"
                         android:text="0"/>
                 </TableRow>
             </TableLayout>
         </LinearLayout>
 
         <Button
+            android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/txt_suchen"
-            android:id="@+id/search"
-            android:layout_below="@+id/linearLayout"
             android:layout_alignParentStart="true"
+            android:layout_below="@+id/linearLayout"
             android:layout_marginTop="25dp"
-            android:onClick="SearchRoomOnClick"/>
+            android:onClick="SearchRoomOnClick"
+            android:text="@string/txt_suchen" />
     </RelativeLayout>
 
 </ScrollView>
