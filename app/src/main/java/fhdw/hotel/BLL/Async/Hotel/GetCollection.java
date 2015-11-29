@@ -1,6 +1,5 @@
 package fhdw.hotel.BLL.Async.Hotel;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Pair;
 
@@ -12,11 +11,9 @@ import fhdw.hotel.BLL.RestService;
 import fhdw.hotel.DomainModel.Hotel;
 
 public class GetCollection extends AsyncTask<String, Void, ArrayList<Hotel>> {
-    private Context context;
     private IAsyncHotelListener callback;
 
-    public GetCollection(Context p_context, IAsyncHotelListener p_callback) {
-        context = p_context;
+    public GetCollection(IAsyncHotelListener p_callback) {
         callback = p_callback;
     }
 

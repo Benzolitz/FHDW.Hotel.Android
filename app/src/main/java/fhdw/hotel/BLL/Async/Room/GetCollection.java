@@ -9,11 +9,9 @@ import fhdw.hotel.BLL.Async.IListener.IAsyncRoomListener;
 import fhdw.hotel.DomainModel.Room;
 
 public class GetCollection extends AsyncTask<String, Void, ArrayList<Room>> {
-    private Context context;
     private IAsyncRoomListener callback;
 
-    public GetCollection(Context p_context, IAsyncRoomListener p_callback) {
-        context = p_context;
+    public GetCollection(IAsyncRoomListener p_callback) {
         callback = p_callback;
     }
 

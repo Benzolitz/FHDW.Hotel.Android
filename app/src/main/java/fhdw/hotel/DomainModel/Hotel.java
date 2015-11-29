@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Hotel {
     private int Id;
+    private String Name;
     private Address Address;
     private ArrayList<Room> Rooms;
 
@@ -12,6 +13,11 @@ public class Hotel {
     }
     public void setId(int p_id) {
         Id = p_id;
+    }
+
+    public String getName() {return Name;}
+    public void setName(String name) {
+        Name = name;
     }
 
     public Address getAddress() {

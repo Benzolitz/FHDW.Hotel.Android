@@ -20,8 +20,6 @@ import fhdw.hotel.BLL.Async.IListener.IAsyncHotelListener;
 import fhdw.hotel.DomainModel.Hotel;
 import fhdw.hotel.R;
 
-
-
 public class SearchFormular extends AppCompatActivity implements IAsyncHotelListener {
     private SimpleDateFormat dateFormatter;
 
@@ -142,7 +140,10 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
 
     // region Async-Methods
     public void getHotelCollection() {
-        new fhdw.hotel.BLL.Async.Hotel.GetCollection(null, this).execute();
+        new fhdw.hotel.BLL.Async.Hotel.GetCollection(this).execute();
+    }
+    public void getHotel() {
+        new fhdw.hotel.BLL.Async.Hotel.Get(this).execute("1");
     }
 
     @Override
