@@ -8,22 +8,32 @@ import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 import fhdw.hotel.BLL.Async.IListener.IAsyncHotelListener;
 import fhdw.hotel.DomainModel.Hotel;
 import fhdw.hotel.R;
 
+/**
+ *
+ *
+ * */
 public class SearchFormular extends AppCompatActivity implements IAsyncHotelListener {
     private SimpleDateFormat dateFormatter;
 
     // region Initialization
+
     /**
      * @param savedInstanceState
      */
@@ -32,11 +42,13 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_search_formular);
+        getHotelCollection();
+
 
         dateFormatter = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
         removeKeypadFromDatePicker();
 
-        getHotelCollection();
+
     }
 
     /**
@@ -52,6 +64,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
     // endregion
 
     // region onClickMethods
+
     /**
      * @param view
      */
@@ -75,6 +88,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
 
     /**
      * Show the Datepicker and set the selected date into the arrival textbox.
+     *
      * @param view
      */
     public void getArrivalDate(View view) {
@@ -83,6 +97,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
 
     /**
      * Show the Datepicker, check the date and set the selected date into the departure textbox.
+     *
      * @param view
      */
     public void getDepartureDate(View view) {
@@ -92,6 +107,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
     // endregion
 
     // region HelperMethods
+
     /**
      * @param txtArrivalDate
      */
@@ -108,8 +124,10 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
     // endregion
 
     //region GUI-Methods
+
     /**
      * Inflate the menu; this adds items to the action bar if it is present.
+     *
      * @param menu
      * @return
      */
@@ -122,6 +140,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
 
     /**
      * Handle action bar item clicks here. The action bar will automatically handle clicks on the Home/Up button, so long as you specify a parent activity in AndroidManifest.xml.
+     *
      * @param item
      * @return
      */
@@ -141,14 +160,19 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
     // region Async-Methods
     public void getHotelCollection() {
         new fhdw.hotel.BLL.Async.Hotel.GetCollection(this).execute();
-    }
-    public void getHotel() {
-        new fhdw.hotel.BLL.Async.Hotel.Get(this).execute("1");
+
     }
 
     @Override
     public void GetCollectionComplete(ArrayList<Hotel> p_result) {
 
+        Spinner spn_cities = (Spinner) findViewById(R.id.spnCity);
+
+        ArrayAdapter<Hotel> adapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, p_result);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn_cities.setAdapter(adapter);
     }
 
     @Override

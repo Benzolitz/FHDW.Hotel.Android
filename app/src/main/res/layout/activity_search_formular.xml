@@ -34,9 +34,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
                 android:layout_marginTop="10dp"
-                android:entries="@array/stadt_anzeige"
-                android:entryValues="@array/stadt_werte"
                 android:focusable="true">
+
+                <!--android:entries="@array/stadt_anzeige"-->
+                <!--android:entryValues="@array/stadt_werte"-->
 
                 <requestFocus />
             </Spinner>
