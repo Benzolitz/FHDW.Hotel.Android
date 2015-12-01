@@ -4,9 +4,11 @@ import android.os.AsyncTask;
 import android.util.Pair;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import fhdw.hotel.BLL.Async.IListener.IAsyncHotelListener;
+import fhdw.hotel.BLL.JsonService;
 import fhdw.hotel.BLL.RestService;
 import fhdw.hotel.DomainModel.Hotel;
 
@@ -20,7 +22,8 @@ public class GetCollection extends AsyncTask<String, Void, ArrayList<Hotel>> {
     @Override
     protected ArrayList<Hotel> doInBackground(String... params) {
         try {
-            return RestService.Get(callback.Controller, new ArrayList<Pair<String, String>>());
+            InputStream stream =  RestService.Get(callback.Controller, new ArrayList<Pair<String, String>>());
+            return new JsonService<ArrayList<Hotel>>().DeserializeJson(stream);
         } catch (IOException e) {
             e.printStackTrace();
         }

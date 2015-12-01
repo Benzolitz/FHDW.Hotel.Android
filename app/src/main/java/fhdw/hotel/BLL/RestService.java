@@ -18,17 +18,17 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class RestService {
-    private static String serverUrl = "http://192.168.2.104:35588/api/";
+    private static String serverUrl = "http://192.168.178.30/api/";
 
     // region Web-Methods
-    public static <T> T Get(String p_controller, ArrayList<Pair<String, String>> p_parameters) throws IOException {
+    public static InputStream Get(String p_controller, ArrayList<Pair<String, String>> p_parameters) throws IOException {
         URL url = createGetUrl(p_controller, p_parameters);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestProperty("Accept", "application/json");
 
         try {
             InputStream in = urlConnection.getInputStream();
-            return DeserializeJson(in);
+            return in;
         } catch (Exception ex) {
             throw ex;
         } finally {
@@ -74,22 +74,6 @@ public class RestService {
     // endregion
 
     // region Helper
-    private static <T> T DeserializeJson(InputStream p_json) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(p_json));
-        StringBuilder out = new StringBuilder();
-
-        String line;
-        while ((line = reader.readLine()) != null) {
-            out.append(line);
-        }
-
-        reader.close();
-
-        Gson gson = new Gson();
-        return gson.fromJson(out.toString(), new TypeToken<T>() {
-        }.getType());
-    }
-
     private static URL createGetUrl(String p_controller, ArrayList<Pair<String, String>> p_parameters) throws MalformedURLException {
         String completeUrl = serverUrl + p_controller;
 

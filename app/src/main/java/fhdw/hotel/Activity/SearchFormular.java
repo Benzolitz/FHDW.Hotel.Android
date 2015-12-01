@@ -13,22 +13,15 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.ExecutionException;
 
 import fhdw.hotel.BLL.Async.IListener.IAsyncHotelListener;
 import fhdw.hotel.DomainModel.Hotel;
 import fhdw.hotel.R;
 
-/**
- *
- *
- * */
 public class SearchFormular extends AppCompatActivity implements IAsyncHotelListener {
     private SimpleDateFormat dateFormatter;
 
@@ -42,13 +35,11 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_search_formular);
-        getHotelCollection();
-
 
         dateFormatter = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
         removeKeypadFromDatePicker();
 
-
+        getHotelCollection();
     }
 
     /**
@@ -160,16 +151,13 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
     // region Async-Methods
     public void getHotelCollection() {
         new fhdw.hotel.BLL.Async.Hotel.GetCollection(this).execute();
-
     }
 
     @Override
     public void GetCollectionComplete(ArrayList<Hotel> p_result) {
-
         Spinner spn_cities = (Spinner) findViewById(R.id.spnCity);
 
-        ArrayAdapter<Hotel> adapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_item, p_result);
+        ArrayAdapter<Hotel> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, p_result);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_cities.setAdapter(adapter);
