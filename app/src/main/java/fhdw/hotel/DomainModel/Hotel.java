@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Hotel {
     private int Id;
     private String Name;
+
     private Address Address;
     private ArrayList<Room> Rooms;
 
