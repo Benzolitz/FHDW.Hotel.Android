@@ -155,6 +155,8 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
 
     @Override
     public void GetCollectionComplete(ArrayList<Hotel> p_result) {
+        if(p_result == null) return;
+
         Spinner spn_cities = (Spinner) findViewById(R.id.spnCity);
 
         ArrayAdapter<Hotel> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, p_result);

@@ -3,12 +3,13 @@ package fhdw.hotel.BLL.Async.Hotel;
 import android.os.AsyncTask;
 import android.util.Pair;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import fhdw.hotel.BLL.Async.IListener.IAsyncHotelListener;
-import fhdw.hotel.BLL.JsonService;
 import fhdw.hotel.BLL.RestService;
 import fhdw.hotel.DomainModel.Hotel;
 
@@ -22,8 +23,8 @@ public class GetCollection extends AsyncTask<String, Void, ArrayList<Hotel>> {
     @Override
     protected ArrayList<Hotel> doInBackground(String... params) {
         try {
-            InputStream stream =  RestService.Get(callback.Controller, new ArrayList<Pair<String, String>>());
-            return new JsonService<ArrayList<Hotel>>().DeserializeJson(stream);
+            String json =  RestService.Get(callback.Controller, new ArrayList<Pair<String, String>>());
+            return new Gson().fromJson(json, new TypeToken<ArrayList<Hotel>>(){}.getType());
         } catch (IOException e) {
             e.printStackTrace();
         }
