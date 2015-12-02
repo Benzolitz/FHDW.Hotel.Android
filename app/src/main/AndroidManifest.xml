@@ -27,7 +27,9 @@
         <activity
             android:name=".Activity.RoomSelection"
             android:label="@string/title_activity_accordeon_zimmer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity
             android:name=".Activity.Login"
             android:label="@string/title_activity_login">
@@ -36,6 +38,16 @@
         <activity
             android:name=".Activity.Register"
             android:label="@string/title_activity_register">
+
+        </activity>
+        <activity
+            android:name=".Activity.RegisterDescision"
+            android:label="@string/title_activity_register_descision">
+
+        </activity>
+        <activity
+            android:name=".Activity.Booking"
+            android:label="@string/title_activity_booking">
 
         </activity>
     </application>

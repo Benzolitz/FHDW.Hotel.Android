@@ -4,7 +4,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:id="@+id/faq_header">
+    android:id="@+id/faq_header"
+    android:weightSum="1">
 
     <TextView
         android:layout_width="fill_parent"
@@ -19,7 +20,8 @@
     <LinearLayout
         android:id="@+id/ll_country"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="405dp"
+        android:layout_weight="0.46">
 
         <ScrollView
             android:id="@+id/ScrollView11"
@@ -36,6 +38,13 @@
                 android:stretchColumns="0,1"></LinearLayout>
         </ScrollView>
     </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_goto_register_descision"
+        android:onClick="GoToRegisterDescisionOnClick"
+        android:id="@+id/btn_goto_booking" />
 </LinearLayout>
 
 

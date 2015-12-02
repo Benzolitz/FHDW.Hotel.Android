@@ -11,7 +11,7 @@
     <string name="einzelzimmer">Einzel</string>
     <string name="doppelzimmer">Doppel</string>
     <string name="familienzimmer">Familie(4 +1 Betten)</string>
-    <string name="title_activity_accordeon_zimmer">AccordeonZimmer</string>
+    <string name="title_activity_accordeon_zimmer">Zimmerauswahl</string>
     <string name="title_activity_login">Einloggen</string>
     <string name="title_activity_register">Registrieren</string>
 
@@ -27,6 +27,14 @@
     <string name="prompt_street">Straße, Haus Nr.</string>
     <string name="prompt_plz">PLZ</string>
     <string name="prompt_city">Ort</string>
+
+    <string name="btn_goto_register_descision">Weiter zur Buchung</string>
+    <string name="btn_goto_booking">Weiter ohne Registrierung</string>
+    <string name="btn_goto_register">Zur Registrierung</string>
+    <string name="description_register_desctision">Sie können sich registrieren um weitere Reservierungen ohne erneute Eingabe von persönlichen Daten durchführen zu können.</string>
+    <string name="title_activity_register_descision">Fortfahren?</string>
+
+    <string name="title_activity_booking">Buchen</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

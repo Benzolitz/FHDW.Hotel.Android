@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/description_register_desctision"
+        android:textSize="18dip"
+        android:typeface="sans" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:id="@+id/ll_descision_btns">
+        <Button
+            android:id="@+id/btn_goto_booking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="GoToRegistrationSiteOnClick"
+            android:text="@string/btn_goto_register" />
+
+        <Button
+            android:id="@+id/button"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/btn_goto_booking"
+            android:onClick="GoToBookingOnClick"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+

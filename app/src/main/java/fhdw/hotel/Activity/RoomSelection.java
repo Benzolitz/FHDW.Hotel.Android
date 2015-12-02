@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,11 +27,13 @@ import fhdw.hotel.R;
 public class RoomSelection extends Activity implements IAsyncRoomListener {
 
     LinearLayout rooms;
+    Button gotoBooking;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_room_selection);
         rooms = (LinearLayout) findViewById(R.id.linearLayoutRooms);
+        gotoBooking = (Button) findViewById(R.id.btn_goto_booking);
 
         Intent intent = getIntent();
 
@@ -164,5 +167,13 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
     @Override
     public void GetRoom(Room p_result) {
 
+    }
+
+    public void GoToRegisterDescisionOnClick(View view) {
+        Intent intent = new Intent(RoomSelection.this, RegisterDescision.class);
+
+
+
+        startActivity(intent);
     }
 }
