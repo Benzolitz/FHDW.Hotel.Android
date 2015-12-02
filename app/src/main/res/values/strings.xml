@@ -56,6 +56,7 @@
     <!--<string name="app_name">HelloAccordion_JAVA</string>-->
 
     <color name="white">#ffffffff</color>
-<color name="black">#ff000000</color>
+    <color name="black">#ff000000</color>
+    <string name="title_activity_test_activity">test_activity</string>
 
 </resources>

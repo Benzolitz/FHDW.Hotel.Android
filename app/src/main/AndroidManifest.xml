@@ -17,7 +17,6 @@
         <activity
             android:name=".Activity.SearchFormular"
             android:label="@string/title_activity_prototype_suchform">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,29 +26,23 @@
         <activity
             android:name=".Activity.RoomSelection"
             android:label="@string/title_activity_accordeon_zimmer"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Activity.Login"
-            android:label="@string/title_activity_login">
-
-        </activity>
+            android:label="@string/title_activity_login"></activity>
         <activity
             android:name=".Activity.Register"
-            android:label="@string/title_activity_register">
-
-        </activity>
+            android:label="@string/title_activity_register"></activity>
         <activity
             android:name=".Activity.RegisterDescision"
-            android:label="@string/title_activity_register_descision">
-
-        </activity>
+            android:label="@string/title_activity_register_descision"></activity>
         <activity
             android:name=".Activity.Booking"
-            android:label="@string/title_activity_booking">
-
-        </activity>
+            android:label="@string/title_activity_booking"></activity>
+        <activity
+            android:name=".Activity.test_activity"
+            android:label="@string/title_activity_test_activity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
