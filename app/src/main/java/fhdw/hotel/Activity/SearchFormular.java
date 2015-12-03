@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import fhdw.hotel.BLL.Async.IListener.IAsyncHotelListener;
+import fhdw.hotel.DomainModel.Address;
 import fhdw.hotel.DomainModel.Hotel;
 import fhdw.hotel.R;
 
@@ -155,11 +156,16 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
 
     @Override
     public void GetCollectionComplete(ArrayList<Hotel> p_result) {
-        if(p_result == null) return;
+        if (p_result == null) return;
 
+        ArrayList<String> adrLst = new ArrayList<>();
+
+        for (int i = 0; i < p_result.size(); i++) {
+            adrLst.add(p_result.get(i).getAddress().getCity());
+        }
         Spinner spn_cities = (Spinner) findViewById(R.id.spnCity);
 
-        ArrayAdapter<Hotel> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, p_result);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, adrLst);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_cities.setAdapter(adapter);
