@@ -1,6 +1,8 @@
 package fhdw.hotel.Activity;
 
 
+import android.widget.RadioGroup;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +11,12 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
+
 import android.widget.TableLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,6 +32,7 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
 
     LinearLayout rooms;
     Button gotoBooking;
+    RadioButton selectedRbn;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +55,7 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
         for (int i = 0; i < allRooms.size(); i++) {
             rooms.addView(getAccordionButton(i, allRooms.get(i)), new TableLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
             rooms.addView(getRoomInformation(i), new TableLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+            rooms.addView(getImageView(i, allRooms.get(i)));
         }
     }
 
@@ -76,6 +82,29 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
         btnAccordion.setOnClickListener(AccordionOnClick());
         return btnAccordion;
     }
+
+    private View getImageView(int p_id, Room p_currentRoom) {
+        ImageView hotelImgView;
+        hotelImgView = new ImageView(this);
+        hotelImgView.setId(p_id);
+
+        return hotelImgView;
+    }
+
+
+    private View.OnClickListener RoomTypeRadioClick() {
+        return new View.OnClickListener(){
+            public void onClick(View v) {
+//                RadioGroup rg = (RadioGroup)getRoomTypeSelection();
+//                int id = rg.getCheckedRadioButtonId();
+//                selectedRbn = (RadioButton) findViewById(id);
+//                Toast.makeText(RoomSelection.this,
+//                        selectedRbn.getText().toString(), Toast.LENGTH_SHORT).show();
+
+            }
+        };
+    }
+
 
     private View.OnClickListener AccordionOnClick() {
         return new View.OnClickListener() {
@@ -146,15 +175,31 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
 
         RadioButton radStandard = new RadioButton(this);
         radStandard.setText(Enums.RoomCategoryToString(Enums.RoomCategory.Standard));
+        radStandard.setOnClickListener(RoomTypeRadioClick());
         radGroupRoomType.addView(radStandard);
 
         RadioButton radLuxus = new RadioButton(this);
         radLuxus.setText(Enums.RoomCategoryToString(Enums.RoomCategory.Luxus));
+        radLuxus.setOnClickListener(RoomTypeRadioClick());
         radGroupRoomType.addView(radLuxus);
 
         RadioButton radSuperior = new RadioButton(this);
         radSuperior.setText(Enums.RoomCategoryToString(Enums.RoomCategory.Superior));
+        radSuperior.setOnClickListener(RoomTypeRadioClick());
         radGroupRoomType.addView(radSuperior);
+
+        radGroupRoomType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+           public void onCheckedChanged(RadioGroup rg, int checkedId) {
+                for (int i = 0; i < rg.getChildCount(); i++) {
+                    RadioButton btn = (RadioButton) rg.getChildAt(i);
+                    if (btn.getId() == checkedId) {
+                        String text = btn.getText().toString();
+                        Toast.makeText(RoomSelection.this, text, Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+            }
+        });
 
         return radGroupRoomType;
     }
