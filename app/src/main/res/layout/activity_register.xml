@@ -90,7 +90,7 @@
             android:layout_width="76dp"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_plz"
-            android:inputType="text"
+            android:inputType="number"
             android:layout_alignTop="@+id/ll_town_plz"
             android:layout_centerHorizontal="true" />
     </LinearLayout>
