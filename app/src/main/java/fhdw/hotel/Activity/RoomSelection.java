@@ -85,7 +85,7 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
 
     private View getImageView(int p_id) {
         ImageView hotelImgView;
-        hotelImgView = new ImageView(RoomSelection.this);
+        hotelImgView = new ImageView(this);
         hotelImgView.setVisibility(View.VISIBLE);
         hotelImgView.setMaxHeight(60);
         hotelImgView.setMaxWidth(60);
