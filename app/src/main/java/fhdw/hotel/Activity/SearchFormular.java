@@ -15,9 +15,11 @@ import android.widget.Spinner;
 
 import com.google.gson.Gson;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import fhdw.hotel.BLL.Async.Guest.InsertGuest;
@@ -101,7 +103,9 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
      */
     public void getDepartureDate(View view) {
         showDatePicker((EditText) findViewById(R.id.txtDepartureDate));
-        // TODO: Check if DepartureDate is before ArrivalDate!
+        // TODO: Check if DepartureDate is before ArrivalDate!#
+
+
     }
     // endregion
 

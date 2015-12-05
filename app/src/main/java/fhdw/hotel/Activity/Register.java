@@ -1,12 +1,10 @@
 package fhdw.hotel.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import java.io.OutputStreamWriter;
 
 import fhdw.hotel.DomainModel.Guest;
 import fhdw.hotel.R;
@@ -19,7 +17,7 @@ public class Register extends AppCompatActivity {
     EditText firstname;
     EditText pw;
     EditText rpt_pw;
-    Guest besucher;
+    Guest guest;
 
     @Override
 
@@ -37,31 +35,39 @@ public class Register extends AppCompatActivity {
 
     public void RegisterNewUser(View v) {
 
+        guest = new Guest();
+
         if(email.getText().toString().isEmpty()) {
             email.requestFocus();
             email.setError("Bitte Email eingeben");
+        }
+        else {
+            guest.Emailaddress = email.getText().toString();
         }
 
         if(lastname.getText().toString().isEmpty()) {
             lastname.requestFocus();
             lastname.setError("Bitte Nachnamen eingeben");
         }
+        else {
+            guest.Lastname = lastname.getText().toString();
+        }
 
         if(firstname.getText().toString().isEmpty()) {
             firstname.requestFocus();
             firstname.setError("Bitte Vornamen eingeben");
+        }
+        else {
+            guest.Firstname = firstname.getText().toString();
         }
 
         if(!checkPassWordAndConfirmPassword(pw.getText().toString(),rpt_pw.getText().toString())) {
             rpt_pw.requestFocus();
             rpt_pw.setError("Die Passwörter stimmen nicht überein");
         }
-
-
-        besucher = new Guest();
-        besucher.setEmailaddress(email.toString());
-        besucher.setLastname(lastname.toString());
-        besucher.setFirstname(firstname.toString());
+        else {
+            guest.Password = pw.getText().toString();
+        }
 
 
     }

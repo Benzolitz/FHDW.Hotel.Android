@@ -27,6 +27,7 @@
     <string name="prompt_street">Straße, Haus Nr.</string>
     <string name="prompt_plz">PLZ</string>
     <string name="prompt_city">Ort</string>
+    <string name="prompt_phone">Telefon</string>
 
     <string name="btn_goto_register_descision">Weiter zur Buchung</string>
     <string name="btn_goto_booking">Weiter ohne Registrierung</string>
