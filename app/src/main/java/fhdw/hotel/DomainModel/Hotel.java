@@ -7,4 +7,34 @@ public class Hotel {
     public String Name;
     public Address Address;
     public ArrayList<Room> Rooms;
+
+    // region Getter & Setter
+    public int getId() {
+        return Id;
+    }
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public String getName() {
+        return Name;
+    }
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public fhdw.hotel.DomainModel.Address getAddress() {
+        return Address;
+    }
+    public void setAddress(fhdw.hotel.DomainModel.Address address) {
+        Address = address;
+    }
+
+    public ArrayList<Room> getRooms() {
+        return Rooms;
+    }
+    public void setRooms(ArrayList<Room> rooms) {
+        Rooms = rooms;
+    }
+    // endregion
 }
