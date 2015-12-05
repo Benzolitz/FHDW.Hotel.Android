@@ -13,17 +13,22 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.gson.Gson;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+import fhdw.hotel.BLL.Async.Guest.InsertGuest;
+import fhdw.hotel.BLL.Async.IListener.IAsyncGuestListener;
 import fhdw.hotel.BLL.Async.IListener.IAsyncHotelListener;
 import fhdw.hotel.DomainModel.Address;
+import fhdw.hotel.DomainModel.Guest;
 import fhdw.hotel.DomainModel.Hotel;
 import fhdw.hotel.R;
 
-public class SearchFormular extends AppCompatActivity implements IAsyncHotelListener {
+public class SearchFormular extends AppCompatActivity implements IAsyncHotelListener, IAsyncGuestListener {
     private SimpleDateFormat dateFormatter;
 
     // region Initialization
@@ -41,6 +46,8 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
         removeKeypadFromDatePicker();
 
         getHotelCollection();
+
+        insertGuestTest();
     }
 
     /**
@@ -161,7 +168,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
         ArrayList<String> adrLst = new ArrayList<>();
 
         for (int i = 0; i < p_result.size(); i++) {
-            adrLst.add(p_result.get(i).getAddress().getCity());
+            adrLst.add(p_result.get(i).Address.getCity());
         }
         Spinner spn_cities = (Spinner) findViewById(R.id.spnCity);
 
@@ -174,6 +181,24 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
     @Override
     public void GetComplete(Hotel p_result) {
 
+    }
+
+    private void insertGuestTest() {
+        Guest guest = new Guest();
+        guest.Firstname = "Lucas";
+        guest.Lastname = "Engel";
+        guest.Emailaddress = "engellucas@gmx.de";
+        guest.Password = "123456";
+
+        // doInBackground only likes String-Parameter.
+        // Convert objects to JSON-String
+        String json = new Gson().toJson(guest);
+        new fhdw.hotel.BLL.Async.Guest.InsertGuest(this).execute(json);
+    }
+
+    @Override
+    public void InsertGuestTest(Guest p_guest) {
+        Guest guest = p_guest;
     }
     // endregion
 }
