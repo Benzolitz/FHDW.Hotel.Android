@@ -26,6 +26,7 @@ import fhdw.hotel.BLL.Async.Guest.InsertGuest;
 import fhdw.hotel.BLL.Async.IListener.IAsyncGuestListener;
 import fhdw.hotel.BLL.Async.IListener.IAsyncHotelListener;
 import fhdw.hotel.DomainModel.Address;
+import fhdw.hotel.DomainModel.CurrentBooking;
 import fhdw.hotel.DomainModel.Guest;
 import fhdw.hotel.DomainModel.Hotel;
 import fhdw.hotel.R;
@@ -84,6 +85,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
         int familyRoomCount = Integer.parseInt(txtFamilyRoomCount.getText().toString());
         intent.putExtra("familyRoomCount", familyRoomCount);
 
+        // TODO add all search relevant items to currentbooking
         startActivity(intent);
     }
 
