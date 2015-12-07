@@ -1,0 +1,194 @@
+{
+	[
+		{
+			"ID":1,
+			"RoomNumber":001,
+			"Cathegory":"Standard",
+			"Type":"Einzel",
+			"PersonCount":1,
+			"Price":30.50,
+			"Hotel": 
+				{
+					"ID":1,
+					"Name":"Keine Ahnung",
+					"Address":
+						{	"ID":1,
+							"Street":"Dieser Weg1",
+							"PostalCode":"12345",
+							"City":"Hannover"
+						},
+					"Rooms":null
+				}
+			
+		},
+		
+		{
+			"ID":2,
+			"RoomNumber":002,
+			"Cathegory":"Comfort",
+			"Type":"Einzel",
+			"PersonCount":1,
+			"Price":35.50,
+			"Hotel": 
+				{
+					"ID":1,
+					"Name":"Keine Ahnung",
+					"Address":
+						{	"ID":1,
+							"Street":"Dieser Weg1",
+							"PostalCode":"12345",
+							"City":"Hannover"
+						},
+					"Rooms":null
+				}
+		},
+		
+		{
+			"ID":3,
+			"RoomNumber":003,
+			"Cathegory":"Luxus",
+			"Type":"Einzel",
+			"PersonCount":1,
+			"Price":60.00,
+			"Hotel": 
+				{
+					"ID":1,
+					"Name":"Keine Ahnung",
+					"Address":
+						{	"ID":1,
+							"Street":"Dieser Weg1",
+							"PostalCode":"12345",
+							"City":"Hannover"
+						},
+					"Rooms":null
+				}
+		},
+		
+		{
+			"ID":4,
+			"RoomNumber":004,
+			"Cathegory":"Standard",
+			"Type":"Doppel",
+			"PersonCount":2,
+			"Price":35.50,
+			"Hotel": 
+				{
+					"ID":1,
+					"Name":"Keine Ahnung",
+					"Address":
+						{	"ID":1,
+							"Street":"Dieser Weg1",
+							"PostalCode":"12345",
+							"City":"Hannover"
+						},
+					"Rooms":null
+				}
+		},
+		
+		{
+			"ID":5,
+			"RoomNumber":005,
+			"Cathegory":"Comfort",
+			"Type":"Doppel",
+			"PersonCount":2,
+			"Price":45.50,
+			"Hotel": 
+				{
+					"ID":1,
+					"Name":"Keine Ahnung",
+					"Address":
+						{	"ID":1,
+							"Street":"Dieser Weg1",
+							"PostalCode":"12345",
+							"City":"Hannover"
+						},
+					"Rooms":null
+				}
+		},
+		
+		{
+			"ID":6,
+			"RoomNumber":006,
+			"Cathegory":"Luxus",
+			"Type":"Doppel",
+			"PersonCount":2,
+			"Price":65.50,
+			"Hotel": 
+				{
+					"ID":1,
+					"Name":"Keine Ahnung",
+					"Address":
+						{	"ID":1,
+							"Street":"Dieser Weg1",
+							"PostalCode":"12345",
+							"City":"Hannover"
+						},
+					"Rooms":null
+				}
+		},
+		
+		{
+			"ID":7,
+			"RoomNumber":007,
+			"Cathegory":"Standard",
+			"Type":"Familie",
+			"PersonCount":5,
+			"Price":45.50,
+			"Hotel": 
+				{
+					"ID":1,
+					"Name":"Keine Ahnung",
+					"Address":
+						{	"ID":1,
+							"Street":"Dieser Weg1",
+							"PostalCode":"12345",
+							"City":"Hannover"
+						},
+					"Rooms":null
+				}
+		},
+		
+		{
+			"ID":8,
+			"RoomNumber":008,
+			"Cathegory":"Comfort",
+			"Type":"Familie",
+			"PersonCount":5,
+			"Price":60.50,
+			"Hotel": 
+				{
+					"ID":1,
+					"Name":"Keine Ahnung",
+					"Address":
+						{	"ID":1,
+							"Street":"Dieser Weg1",
+							"PostalCode":"12345",
+							"City":"Hannover"
+						},
+					"Rooms":null
+				}
+		},
+		
+		{
+			"ID":9,
+			"RoomNumber":009,
+			"Cathegory":"Luxus",
+			"Type":"Familie",
+			"PersonCount":5,
+			"Price":80.50,
+			"Hotel": 
+				{
+					"ID":1,
+					"Name":"Keine Ahnung",
+					"Address":
+						{	"ID":1,
+							"Street":"Dieser Weg1",
+							"PostalCode":"12345",
+							"City":"Hannover"
+						},
+					"Rooms":null
+				}
+		}
+		
+	]
+}

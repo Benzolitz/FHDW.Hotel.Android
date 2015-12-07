@@ -17,6 +17,7 @@ public class CurrentBooking {
     public static int getId() {
         return Id;
     }
+
     public static void setId(int id) {
         Id = id;
     }
@@ -24,6 +25,7 @@ public class CurrentBooking {
     public static Date getArrival() {
         return Arrival;
     }
+
     public static void setArrival(Date arrival) {
         Arrival = arrival;
     }
@@ -31,6 +33,7 @@ public class CurrentBooking {
     public static Date getDeparture() {
         return Departure;
     }
+
     public static void setDeparture(Date departure) {
         Departure = departure;
     }
@@ -38,6 +41,7 @@ public class CurrentBooking {
     public static ArrayList<Room> getRooms() {
         return Rooms;
     }
+
     public static void setRooms(ArrayList<Room> rooms) {
         Rooms = rooms;
     }

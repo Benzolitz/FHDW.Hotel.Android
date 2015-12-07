@@ -33,6 +33,6 @@ public class GetCollection extends AsyncTask<String, Void, ArrayList<Hotel>> {
 
     @Override
     protected void onPostExecute(ArrayList<Hotel> result) {
-        callback.GetCollectionComplete(result);
+        callback.GetHotelCollectionComplete(result);
     }
 }

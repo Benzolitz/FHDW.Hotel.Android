@@ -3,6 +3,8 @@ package fhdw.hotel.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -151,4 +153,41 @@ public class Register extends AppCompatActivity implements IAsyncGuestListener {
         String json = new Gson().toJson(p_guest);
         new fhdw.hotel.BLL.Async.Guest.InsertGuest(this).execute(json);
     }
+
+    //region GUI-Methods
+
+    /**
+     * Inflate the menu; this adds items to the action bar if it is present.
+     *
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        return true;
+    }
+
+    /**
+     * Handle action bar item clicks here. The action bar will automatically handle clicks on the Home/Up button, so long as you specify a parent activity in AndroidManifest.xml.
+     *
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.login_action:
+                Intent intent = new Intent(this, Login.class);
+                this.startActivity(intent);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+        return true;
+    }
+
+    //endregion
 }

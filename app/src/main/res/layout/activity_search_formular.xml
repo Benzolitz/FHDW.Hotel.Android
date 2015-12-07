@@ -70,7 +70,7 @@
 
             <EditText
                 android:id="@+id/txtArrivalDate"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10px"
                 android:ems="10"
@@ -88,7 +88,7 @@
 
             <EditText
                 android:id="@+id/txtDepartureDate"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
                 android:layout_marginTop="10px"

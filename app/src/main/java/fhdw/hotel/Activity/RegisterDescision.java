@@ -26,7 +26,7 @@ public class RegisterDescision extends Activity{
     }
 
     public void GoToRegistrationSiteOnClick(View view) {
-        Intent intent = new Intent(RegisterDescision.this, Login.class);
+        Intent intent = new Intent(RegisterDescision.this, Register.class);
 
 
 

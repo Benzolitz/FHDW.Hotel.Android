@@ -7,6 +7,6 @@ import fhdw.hotel.DomainModel.Hotel;
 public interface IAsyncHotelListener {
     String Controller = "Hotel";
 
-    void GetCollectionComplete(ArrayList<Hotel> p_result);
+    void GetHotelCollectionComplete(ArrayList<Hotel> p_result);
     void GetComplete(Hotel p_result);
 }

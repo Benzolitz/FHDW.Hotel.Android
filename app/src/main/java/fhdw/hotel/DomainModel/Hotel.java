@@ -36,5 +36,9 @@ public class Hotel {
     public void setRooms(ArrayList<Room> rooms) {
         Rooms = rooms;
     }
+    @Override
+    public String toString() {
+        return Address.City;
+    }
     // endregion
 }

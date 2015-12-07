@@ -55,7 +55,7 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
         for (int i = 0; i < allRooms.size(); i++) {
             rooms.addView(getAccordionButton(i, allRooms.get(i)), new TableLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
             rooms.addView(getRoomInformation(i), new TableLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-            rooms.addView(getImageView(i));
+//            rooms.addView(getImageView(i));
         }
     }
 
@@ -84,12 +84,11 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
     }
 
     private View getImageView(int p_id) {
-        ImageView hotelImgView;
-        hotelImgView = new ImageView(this);
+        ImageView hotelImgView = new ImageView(this);
         hotelImgView.setVisibility(View.VISIBLE);
-        hotelImgView.setMaxHeight(60);
-        hotelImgView.setMaxWidth(60);
         hotelImgView.setId(p_id);
+        hotelImgView.setEnabled(true);
+//        hotelImgView.setImageResource(R.mipmap.ein);
         return hotelImgView;
     }
 
@@ -177,27 +176,30 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
                     RadioButton btn = (RadioButton) rg.getChildAt(i);
                     if (btn.getId() == checkedId) {
                         String text = btn.getText().toString();
-                        ImageView img = (ImageView) getImageView(checkedId);
+
+//                        ImageView img = (ImageView) getImageView(checkedId);
 
                         if (!text.isEmpty()) {
                             switch (text) {
                                 case "Standard":
 //                                    img.setBackgroundResource(R.mipmap.ein);
 //                                    img.setImageDrawable(getResources().getDrawable(R.mipmap.ein));
-                                    img.setImageResource(R.mipmap.ein);
+//                                    img.setImageResource(R.mipmap.ein);
 
                                     break;
 
                                 case "Luxus":
 //                                    img.setBackgroundResource(R.mipmap.dop);
 //                                    img.setImageDrawable(getResources().getDrawable(R.mipmap.dop));
-                                    img.setImageResource(R.mipmap.dop);
+//                                    img.setImageResource(R.mipmap.dop);
+
                                     break;
 
                                 case "Überragend":
 //                                    img.setBackgroundResource(R.mipmap.fam);
 //                                    img.setImageDrawable(getResources().getDrawable(R.mipmap.fam));
-                                    img.setImageResource(R.mipmap.fam);
+//                                    img.setImageResource(R.mipmap.fam);
+
                                     break;
 
                                 default:
@@ -219,8 +221,9 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
         return radGroupRoomType;
     }
 
+
     @Override
-    public void GetCollectionComplete(ArrayList<Room> p_result) {
+    public void GetRoomCollectionComplete(ArrayList<Room> p_result) {
 
     }
 
