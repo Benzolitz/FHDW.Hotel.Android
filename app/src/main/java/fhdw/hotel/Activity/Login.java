@@ -29,10 +29,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import fhdw.hotel.BLL.Async.IListener.IAsyncGuestListener;
+import fhdw.hotel.DomainModel.Guest;
 import fhdw.hotel.R;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -40,7 +43,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>, IAsyncGuestListener {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -98,11 +101,9 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
+
     public void GoToRegistrationOnClick(View view) {
         Intent intent = new Intent(Login.this, Register.class);
-
-
-
         startActivity(intent);
     }
 
@@ -197,8 +198,8 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+
+            new fhdw.hotel.BLL.Async.Guest.CheckLogin(this).execute(email, password);
         }
     }
 
@@ -280,6 +281,17 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
 
+    }
+
+    @Override
+    public void CheckLoginComplete(Guest p_guest) {
+        showProgress(false);
+        if(p_guest != null){
+            // Login erfolgreich
+        }
+        else{
+            // Login fehlgeschlagen
+        }
     }
 
     private interface ProfileQuery {

@@ -5,5 +5,5 @@ import fhdw.hotel.DomainModel.Guest;
 public interface IAsyncGuestListener {
     String Controller = "Guest";
 
-    void InsertGuestTest(Guest p_guest);
+    void CheckLoginComplete(Guest p_guest);
 }
