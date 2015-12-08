@@ -1,6 +1,7 @@
 package fhdw.hotel.Activity;
 
 
+import android.support.annotation.NonNull;
 import android.widget.RadioGroup;
 
 import android.app.Activity;
@@ -10,7 +11,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -21,10 +21,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import fhdw.hotel.BLL.Async.IListener.IAsyncHotelListener;
 import fhdw.hotel.BLL.Async.IListener.IAsyncRoomListener;
 import fhdw.hotel.DomainModel.Enums;
-import fhdw.hotel.DomainModel.Hotel;
 import fhdw.hotel.DomainModel.Room;
 import fhdw.hotel.R;
 
@@ -54,16 +52,16 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
 
         for (int i = 0; i < allRooms.size(); i++) {
             rooms.addView(getAccordionButton(i, allRooms.get(i)), new TableLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-            rooms.addView(getRoomInformation(i), new TableLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-//            rooms.addView(getImageView(i));
+            rooms.addView(getRoomInformation(i, allRooms.get(i)), new TableLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         }
     }
 
-    private View getRoomInformation(int p_id) {
+    private View getRoomInformation(int p_id, Room p_room) {
         LinearLayout llRoomInformation;
         llRoomInformation = new LinearLayout(this);
         llRoomInformation.setId(p_id);
-        llRoomInformation.addView(getRoomTypeSelection());
+        llRoomInformation.addView(getRoomTypeSelection(p_id));
+        llRoomInformation.addView(getImageView(p_id, p_room));
         llRoomInformation.setGravity(Gravity.START);
         llRoomInformation.setPadding(20, 10, 10, 10);
         llRoomInformation.setVisibility(View.GONE);
@@ -74,7 +72,7 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
         Button btnAccordion;
         btnAccordion = new Button(this);
         btnAccordion.setId(p_id);
-        btnAccordion.setText(Enums.RoomTypeToString(p_currentRoom.getType()));
+        btnAccordion.setText(Enums.RoomTypeToString(p_currentRoom.getType())); //  + " " + Enums.RoomCategoryToString(p_currentRoom.getCategory()) + " - " + p_currentRoom.Price
         btnAccordion.setTypeface(null, 1);
         btnAccordion.setTextSize(15);
         btnAccordion.setGravity(Gravity.START);
@@ -83,13 +81,29 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
         return btnAccordion;
     }
 
-    private View getImageView(int p_id) {
+    private View getImageView(int p_id, Room p_room) {
         ImageView hotelImgView = new ImageView(this);
         hotelImgView.setVisibility(View.VISIBLE);
         hotelImgView.setId(p_id);
         hotelImgView.setEnabled(true);
-//        hotelImgView.setImageResource(R.mipmap.ein);
+        hotelImgView.setImageResource(getRoomImage(p_room));
         return hotelImgView;
+    }
+
+    private int getRoomImage(Room p_room) {
+        switch (p_room.Type) {
+            case Single:
+                return R.mipmap.single_standard_room;
+
+            case Double:
+                return R.mipmap.double_standard_room;
+
+            case Family:
+                return R.mipmap.family_standard_room;
+
+            default:
+                return 0;
+        }
     }
 
     private View.OnClickListener AccordionOnClick() {
@@ -143,7 +157,7 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
         return allRooms;
     }
 
-    private Collection<? extends Room> getRooms(int p_roomCount, Enums.RoomType p_roomType) {
+    private Collection<Room> getRooms(int p_roomCount, Enums.RoomType p_roomType) {
         ArrayList<Room> roomList = new ArrayList<>();
 
         for (int i = 0; i < p_roomCount; i++) {
@@ -154,7 +168,7 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
         return roomList;
     }
 
-    private View getRoomTypeSelection() {
+    private View getRoomTypeSelection(int p_id) {
         RadioGroup radGroupRoomType = new RadioGroup(this);
         radGroupRoomType.setOrientation(RadioGroup.HORIZONTAL);
 
@@ -170,55 +184,43 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
         radSuperior.setText(Enums.RoomCategoryToString(Enums.RoomCategory.Superior));
         radGroupRoomType.addView(radSuperior);
 
-        radGroupRoomType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        radGroupRoomType.setOnCheckedChangeListener(RoomCategoryChangeListener(p_id));
+
+        return radGroupRoomType;
+    }
+
+    @NonNull
+    private RadioGroup.OnCheckedChangeListener RoomCategoryChangeListener(final int p_id) {
+        return new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup rg, int checkedId) {
                 for (int i = 0; i < rg.getChildCount(); i++) {
                     RadioButton btn = (RadioButton) rg.getChildAt(i);
                     if (btn.getId() == checkedId) {
                         String text = btn.getText().toString();
 
-//                        ImageView img = (ImageView) getImageView(checkedId);
-
+                        // ImageView view = (ImageView)findViewById(p_id);
                         if (!text.isEmpty()) {
                             switch (text) {
                                 case "Standard":
-//                                    img.setBackgroundResource(R.mipmap.ein);
-//                                    img.setImageDrawable(getResources().getDrawable(R.mipmap.ein));
-//                                    img.setImageResource(R.mipmap.ein);
 
                                     break;
 
                                 case "Luxus":
-//                                    img.setBackgroundResource(R.mipmap.dop);
-//                                    img.setImageDrawable(getResources().getDrawable(R.mipmap.dop));
-//                                    img.setImageResource(R.mipmap.dop);
-
                                     break;
 
                                 case "Überragend":
-//                                    img.setBackgroundResource(R.mipmap.fam);
-//                                    img.setImageDrawable(getResources().getDrawable(R.mipmap.fam));
-//                                    img.setImageResource(R.mipmap.fam);
-
                                     break;
 
                                 default:
                                     Toast.makeText(RoomSelection.this, "iwas is schief gelaufen", Toast.LENGTH_SHORT).show();
                                     break;
                             }
-                        } else {
-                            Toast.makeText(RoomSelection.this, "ich bin im else zweig!?!?", Toast.LENGTH_LONG).show();
                         }
-
-
-//                        Toast.makeText(RoomSelection.this, text, Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
             }
-        });
-
-        return radGroupRoomType;
+        };
     }
 
 

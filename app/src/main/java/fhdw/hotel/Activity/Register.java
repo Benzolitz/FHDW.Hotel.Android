@@ -112,7 +112,7 @@ public class Register extends AppCompatActivity implements IAsyncGuestListener {
 
         if(pw.getText().toString().isEmpty()){
             pw.requestFocus();
-            pw.setError("Bitte ein Passwort festlegen!");
+            pw.setError("Bitte single_standard_room Passwort festlegen!");
         }
 
         if(!checkPassWordAndConfirmPassword(pw.getText().toString(),rpt_pw.getText().toString())) {
