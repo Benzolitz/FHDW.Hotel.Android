@@ -6,13 +6,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
 
-import java.util.Date;
-
+import fhdw.hotel.BLL.Async.Guest.CheckLogin;
 import fhdw.hotel.BLL.Async.IListener.IAsyncGuestListener;
 import fhdw.hotel.DomainModel.Address;
 import fhdw.hotel.DomainModel.Guest;
@@ -122,9 +120,6 @@ public class Register extends AppCompatActivity implements IAsyncGuestListener {
         else {
             guest.Password = pw.getText().toString();
         }
-
-        InsertGuestTest(guest);
-
     }
 
     /**
@@ -148,14 +143,7 @@ public class Register extends AppCompatActivity implements IAsyncGuestListener {
         return pstatus;
     }
 
-    @Override
-    public void InsertGuestTest(Guest p_guest) {
-        String json = new Gson().toJson(p_guest);
-        new fhdw.hotel.BLL.Async.Guest.InsertGuest(this).execute(json);
-    }
-
     //region GUI-Methods
-
     /**
      * Inflate the menu; this adds items to the action bar if it is present.
      *
@@ -187,6 +175,11 @@ public class Register extends AppCompatActivity implements IAsyncGuestListener {
         }
 
         return true;
+    }
+
+    @Override
+    public void CheckLoginComplete(Guest p_guest) {
+
     }
 
     //endregion

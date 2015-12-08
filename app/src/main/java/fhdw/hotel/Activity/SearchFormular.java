@@ -1,8 +1,6 @@
 package fhdw.hotel.Activity;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -17,28 +15,22 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
-import fhdw.hotel.BLL.Async.Guest.InsertGuest;
 import fhdw.hotel.BLL.Async.IListener.IAsyncGuestListener;
 import fhdw.hotel.BLL.Async.IListener.IAsyncHotelListener;
 import fhdw.hotel.BLL.Async.IListener.IAsyncRoomListener;
-import fhdw.hotel.DomainModel.Address;
 import fhdw.hotel.DomainModel.CurrentBooking;
 import fhdw.hotel.DomainModel.Guest;
 import fhdw.hotel.DomainModel.Hotel;
 import fhdw.hotel.DomainModel.Room;
-import fhdw.hotel.DomainModel.Booking;
 import fhdw.hotel.R;
 
-public class SearchFormular extends AppCompatActivity implements IAsyncHotelListener, IAsyncGuestListener, IAsyncRoomListener {
+public class SearchFormular extends AppCompatActivity implements IAsyncHotelListener, IAsyncRoomListener {
     private SimpleDateFormat dateFormatter;
     EditText txtDepartureDate;
     EditText txtArrivalDate;
@@ -332,10 +324,6 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
         new fhdw.hotel.BLL.Async.Hotel.GetCollection(this).execute();
     }
 
-    public void getFreeRoomsCollection() {
-        new fhdw.hotel.BLL.Async.Room.GetCollection(this).execute(Integer.toString(hotelId), txtArrivalDate.getText().toString(), txtDepartureDate.getText().toString());
-    }
-
     @Override
     public void GetHotelCollectionComplete(ArrayList<Hotel> p_result) {
         if (p_result == null) return;
@@ -359,40 +347,15 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
 
     }
 
-//    private void insertGuestTest() {
-//        Guest guest = new Guest();
-//        guest.Firstname = "Lucas";
-//        guest.Lastname = "Engel";
-//        guest.Emailaddress = "engellucas@gmx.de";
-//        guest.Password = "123456";
-//
-//        // doInBackground only likes String-Parameter.
-//        // Convert objects to JSON-String
-//        String json = new Gson().toJson(guest);
-//        new fhdw.hotel.BLL.Async.Guest.InsertGuest(this).execute(json);
-//    }
-
-    @Override
-    public void InsertGuestTest(Guest p_guest) {
-        Guest guest = p_guest;
-    }
-
     @Override
     public void GetRoomCollectionComplete(ArrayList<Room> p_result) {
         if (p_result == null) return;
-
         vacantRooms = p_result;
-
-
     }
 
     @Override
     public void GetRoom(Room p_result) {
 
     }
-
-
     // endregion
-
-
 }
