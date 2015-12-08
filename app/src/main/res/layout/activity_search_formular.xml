@@ -27,20 +27,40 @@
                 android:layout_height="wrap_content"
                 android:text="Wählen sie ihre Zielstadt"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <Spinner
-                android:id="@+id/spnCity"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/citySpinnerWithInfo"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
-                android:layout_marginTop="10dp"
-                android:focusable="true">
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/spnCity"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:focusable="true"
+                    android:layout_centerHorizontal="true">
+                    <requestFocus />
+                </Spinner>
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:onClick="ShowHotelInfo"
+                    android:text="@string/btn_hotelinfo"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    />
+
+            </LinearLayout>
+
+
+
 
                 <!--android:entries="@array/stadt_anzeige"-->
                 <!--android:entryValues="@array/stadt_werte"-->
 
-                <requestFocus />
-            </Spinner>
+
 
             <TextView
                 android:id="@+id/lblSelectPersonCount"

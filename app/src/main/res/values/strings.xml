@@ -6,6 +6,7 @@
 
     <string name="title_activity_prototype_suchform">Hotel App</string>
     <string name="txt_suchen">Zimmer Suchen</string>
+    <string name="btn_hotelinfo">Info</string>
     <string name="endDate">Abreisedatum</string>
     <string name="startDate">Anreise</string>
     <string name="title_activity_zimmer_liste">ZimmerListe</string>

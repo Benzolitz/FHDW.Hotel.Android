@@ -16,6 +16,7 @@ public class Booking implements Serializable{
     public int getId() {
         return Id;
     }
+
     public void setId(int id) {
         Id = id;
     }
@@ -23,6 +24,7 @@ public class Booking implements Serializable{
     public Date getArrival() {
         return Arrival;
     }
+
     public void setArrival(Date arrival) {
         Arrival = arrival;
     }
@@ -30,6 +32,7 @@ public class Booking implements Serializable{
     public Date getDeparture() {
         return Departure;
     }
+
     public void setDeparture(Date departure) {
         Departure = departure;
     }
@@ -37,6 +40,7 @@ public class Booking implements Serializable{
     public fhdw.hotel.DomainModel.Guest getGuest() {
         return Guest;
     }
+
     public void setGuest(fhdw.hotel.DomainModel.Guest guest) {
         Guest = guest;
     }
@@ -44,6 +48,7 @@ public class Booking implements Serializable{
     public fhdw.hotel.DomainModel.Hotel getHotel() {
         return Hotel;
     }
+
     public void setHotel(fhdw.hotel.DomainModel.Hotel hotel) {
         Hotel = hotel;
     }
@@ -51,6 +56,7 @@ public class Booking implements Serializable{
     public ArrayList<Room> getRooms() {
         return Rooms;
     }
+
     public void setRooms(ArrayList<Room> rooms) {
         Rooms = rooms;
     }

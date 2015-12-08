@@ -43,6 +43,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
     EditText txtDepartureDate;
     EditText txtArrivalDate;
     Spinner spn_cities;
+    Spinner spn_personCount;
     ArrayList<Hotel> selectedHotel;
     int hotelId;
     ArrayList<Room> vacantRooms;
@@ -50,6 +51,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
     EditText doubleRooms;
     EditText familyRooms;
     Booking myBooking;
+    Hotel myBookingHotel;
 
     // region Initialization
 
@@ -68,12 +70,15 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
         getHotelCollection();
         selectedHotel = new ArrayList<>();
         myBooking = new Booking();
+        myBookingHotel = new Hotel();
 //        spn_cities.setOnItemSelectedListener(ListenOnHotelSpinner());
 
 //        insertGuestTest();
         singleRooms = (EditText) findViewById(R.id.txtSingleRoomCount);
         doubleRooms = (EditText) findViewById(R.id.txtDoubleRoomCount);
         familyRooms = (EditText) findViewById(R.id.txtFamilyRoomCount);
+        spn_personCount = (Spinner) findViewById(R.id.spnPersonCount);
+        vacantRooms = new ArrayList<>();
 
     }
 
@@ -91,11 +96,19 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
 
     // region onClickMethods
 
+    public void ShowHotelInfo(View view) {
+        AlertDialog alertDialog;
+        alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Hotelinfo");
+        alertDialog.setMessage("");
+        alertDialog.show();
+    }
+
     /**
      * @param view
      */
     public void SearchRoomOnClick(View view) throws ParseException {
-        Intent intent = new Intent(SearchFormular.this, RoomSelection.class);
+        Intent intent = new Intent(SearchFormular.this, RegisterDescision.class);
 
 
         /**
@@ -129,8 +142,8 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
         else {
             myBooking.setArrival(dateFormatter.parse(txtDepartureDate.getText().toString()));
         }
-
-        myBooking.setHotel(new myBooking.Hotel().setId(hotelId));
+        myBookingHotel.setId(hotelId);
+        myBooking.setHotel(myBookingHotel);
 
 
         /**
@@ -145,12 +158,17 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
         EditText txtFamilyRoomCount = (EditText) findViewById(R.id.txtFamilyRoomCount);
         int familyRoomCount = Integer.parseInt(txtFamilyRoomCount.getText().toString());
 
+        int selectedRoomCount = singleRoomCount + doubleRoomCount + familyRoomCount;
+        if(Integer.parseInt(spn_personCount.getSelectedItem().toString()) < selectedRoomCount){
+           Toast.makeText(this, "Mehr Zimmer als Gäste!", Toast.LENGTH_SHORT).show();
+        }
+
         /**
          * Check if data coming from server isn't empty and
          * there are enough rooms available for the selected room amount and
          * the selcted rooms have enough beds for the selected amount of guests
          */
-        /*
+
         if (!vacantRooms.isEmpty()) {
             int selectedRoomsBeds = singleRoomCount + (doubleRoomCount * 2) + (familyRoomCount * 5);
             int vacantSingle = 0;
@@ -194,7 +212,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
             alertDialog.setMessage("lol");
             alertDialog.show();
         }
-        */
+
         /**
          * Put room amount selction into extras for next activity action
          */
@@ -203,6 +221,8 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
         intent.putExtra("doubleRoomCount", doubleRoomCount);
 
         intent.putExtra("familyRoomCount", familyRoomCount);
+
+        intent.putExtra("myBooking", myBooking);
 
         // TODO add all search relevant items to currentbooking
         getFreeRoomsCollection();
@@ -339,7 +359,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
     @Override
     public void GetRoomCollectionComplete(ArrayList<Room> p_result) {
         if (p_result == null) return;
-        vacantRooms = new ArrayList<>();
+
         vacantRooms = p_result;
 
 
