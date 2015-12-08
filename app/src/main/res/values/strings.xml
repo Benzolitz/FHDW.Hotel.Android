@@ -29,10 +29,11 @@
     <string name="prompt_firstname">* Vorname</string>
     <string name="prompt_lastname">* Nachname</string>
     <string name="prompt_birthdate">Geburtsdatum</string>
-    <string name="prompt_street">* Straße, Haus Nr.</string>
-    <string name="prompt_plz">* PLZ</string>
-    <string name="prompt_city">* Ort</string>
+    <string name="prompt_street">Straße, Haus Nr.</string>
+    <string name="prompt_plz">PLZ</string>
+    <string name="prompt_city">Ort</string>
     <string name="prompt_phone">Telefon</string>
+    <string name="prompt_show_billing_adr">Andere Rechnungsadresse hinzufügen</string>
 
     <string name="btn_goto_register_descision">Weiter zur Buchung</string>
     <string name="btn_goto_booking">Weiter ohne Registrierung</string>

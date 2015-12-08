@@ -12,6 +12,21 @@
     tools:context=".Activity.CheckBooking"
     tools:showIn="@layout/activity_check_booking">
 
+    <LinearLayout
+        android:id="@+id/ll_my_booking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/title_bookingcheck"
+            android:text="Überprüfen sie ihre Buchung:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/test"/>
 
+    </LinearLayout>
 
 </RelativeLayout>

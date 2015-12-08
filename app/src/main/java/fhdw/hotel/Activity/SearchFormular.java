@@ -184,6 +184,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
             CurrentBooking.setgetSingleRoomCnt(singleRoomCount);
             CurrentBooking.setDoubleRoomCnt(doubleRoomCount);
             CurrentBooking.setFamilyRoomCnt(familyRoomCount);
+            CurrentBooking.setPersonCnt(spn_personCount.getSelectedItem().toString());
 
             try {
                 startActivity(intent);
@@ -266,10 +267,6 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
      */
     public void getDepartureDate(View view) throws ParseException {
         showDatePicker((EditText) findViewById(R.id.txtDepartureDate));
-
-
-        // TODO: Check if DepartureDate is before ArrivalDate!#
-
 
     }
     // endregion

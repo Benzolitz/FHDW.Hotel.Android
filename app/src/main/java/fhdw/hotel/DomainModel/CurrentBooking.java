@@ -10,6 +10,7 @@ public class CurrentBooking {
     public static int singleRoomCnt;
     public static int doubleRoomCnt;
     public static int familyRoomCnt;
+    public static String personCnt;
     public static Date Arrival;
     public static Date Departure;
     public static Guest Guest;
@@ -39,6 +40,14 @@ public class CurrentBooking {
 
     public static void setFamilyRoomCnt(int rooms) {
         familyRoomCnt = rooms;
+    }
+
+    public static String getPersonCnt() {
+        return personCnt;
+    }
+
+    public static void setPersonCnt(String persons) {
+        personCnt = persons;
     }
 
     public static Date getArrival() {
@@ -79,6 +88,36 @@ public class CurrentBooking {
 
     public static void setRooms(ArrayList<Room> rooms) {
         Rooms = rooms;
+    }
+
+
+    public static String toOutString() {
+
+        String billing = "";
+//        if(!Guest.BillingAddress.City.isEmpty() || !Guest.BillingAddress.PostalCode.isEmpty() || !Guest.BillingAddress.Street.isEmpty() ) {
+//            billing = "Rechnungsadresse: "+Guest.BillingAddress.PostalCode + " " + Guest.BillingAddress.City + "\n" +
+//                      "                : "+Guest.BillingAddress.Street;
+//        }
+//        else {
+//            billing = " - ";
+//        }
+
+        return "Name   : " + Guest.Firstname + " " + Guest.Lastname + "\n" +
+               "Email  : " + Guest.Emailaddress + "\n" +
+               "Adresse: " + Guest.ContactAddress.PostalCode + " " + Guest.ContactAddress.City + "\n" +
+               "         " + Guest.ContactAddress.Street + "\n" +
+               "Hotel  : " + Hotel.Name + " " + Hotel.Address.City + "\n" +
+               "Anreise: " + Arrival + "\n" +
+               "Abreise: " + Departure + "\n" +
+               "Anz. Personen: " + personCnt + "\n" +
+
+               "Gebuchte Zimmer: " + "\n" +
+               "  Einzel:  " + singleRoomCnt + "\n" +
+               "  Doppel:  " + doubleRoomCnt + "\n" +
+               "  Familien:" + familyRoomCnt + "\n\n" +
+               "Separate Rechnungsadresse: \n" +
+                billing
+                ;
     }
     // endregion
 }
