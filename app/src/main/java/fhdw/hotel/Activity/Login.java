@@ -287,10 +287,12 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
     public void CheckLoginComplete(Guest p_guest) {
         showProgress(false);
         if(p_guest != null){
-            // Login erfolgreich
+            Intent intent = new Intent(Login.this, SearchFormular.class);
+            startActivity(intent);
         }
         else{
             // Login fehlgeschlagen
+            Toast.makeText(this, "Login Fehler", Toast.LENGTH_SHORT).show();
         }
     }
 
