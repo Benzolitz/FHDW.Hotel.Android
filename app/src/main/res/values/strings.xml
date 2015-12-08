@@ -7,8 +7,8 @@
     <string name="title_activity_prototype_suchform">Hotel App</string>
     <string name="txt_suchen">Zimmer Suchen</string>
     <string name="btn_hotelinfo">Info</string>
-    <string name="endDate">Abreisedatum</string>
-    <string name="startDate">Anreise</string>
+    <string name="endDate">Abreisedatum *</string>
+    <string name="startDate">Anreisedatum *</string>
     <string name="title_activity_zimmer_liste">ZimmerListe</string>
     <string name="title_activity_zimmer_detail">zimmer_detail</string>
     <string name="zimmerauswahl">Zimmerauswahl</string>
@@ -18,6 +18,7 @@
     <string name="title_activity_accordeon_zimmer">Zimmerauswahl</string>
     <string name="title_activity_login">Einloggen</string>
     <string name="title_activity_register">Registrieren</string>
+    <string name="txt_required_fields">Bitte alle mit * gekennzeichneten felder ausfüllen!</string>
 
     <string name="standardZimmer">Standard</string>
     <string name="comfortZimmer">Comfort</string>
@@ -64,6 +65,8 @@
 
     <color name="white">#ffffffff</color>
     <color name="black">#ff000000</color>
+    <color name="red">#FF0000</color>
     <string name="title_activity_test_activity">test_activity</string>
+    <string name="title_activity_check_booking">CheckBooking</string>
 
 </resources>

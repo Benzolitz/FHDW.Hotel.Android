@@ -3,10 +3,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/roomDescisionHeader"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:id="@+id/roomDescisionHeader"
     android:weightSum="1"
     tools:context="fhdw.hotel.Activity.room_descision">
 
@@ -19,22 +19,26 @@
         android:textSize="18dip"
         android:typeface="sans" />
 
+    <Button
+        android:id="@+id/goOnWithLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="GoToLoginView"
+        android:text="@string/menu_action_login" />
 
-        <Button
-            android:id="@+id/button"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_goto_booking"
-            android:onClick="GoToBookingOnClick" />
+    <Button
+        android:id="@+id/goOnWithoutRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="GoToBookingOnClick"
+        android:text="@string/btn_goto_booking" />
 
-        <Button
-            android:id="@+id/btn_goto_booking"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="GoToRegistrationSiteOnClick"
-            android:text="@string/btn_goto_register" />
-
+    <Button
+        android:id="@+id/btn_goto_booking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="GoToRegistrationSiteOnClick"
+        android:text="@string/btn_goto_register" />
 
 
 </LinearLayout>

@@ -50,7 +50,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
     EditText singleRooms;
     EditText doubleRooms;
     EditText familyRooms;
-    Booking myBooking;
+
     Hotel myBookingHotel;
 
     // region Initialization
@@ -69,9 +69,8 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
 
         getHotelCollection();
         selectedHotel = new ArrayList<>();
-        myBooking = new Booking();
+
         myBookingHotel = new Hotel();
-//        spn_cities.setOnItemSelectedListener(ListenOnHotelSpinner());
 
 //        insertGuestTest();
         singleRooms = (EditText) findViewById(R.id.txtSingleRoomCount);
@@ -104,13 +103,13 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
 
     public void ShowHotelInfo(View view) {
         String strasse = "";
-        String plz= "";
+        String plz = "";
         String stadt = "";
         String name = "";
 
 
-        for(int i = 0; i < selectedHotel.size(); i++) {
-            if(selectedHotel.get(i).getId() == hotelId) {
+        for (int i = 0; i < selectedHotel.size(); i++) {
+            if (selectedHotel.get(i).getId() == hotelId) {
                 name = selectedHotel.get(i).getName();
                 strasse = selectedHotel.get(i).getAddress().getStreet();
                 plz = selectedHotel.get(i).getAddress().getPostalCode();
@@ -131,35 +130,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
      */
     public void SearchRoomOnClick(View view) throws ParseException {
         Intent intent = new Intent(SearchFormular.this, RegisterDescision.class);
-
-
-        /**
-         * Check for selected city to get its id
-         */
-
-
-
-
-        /**
-         * Check if arrival and departure dates are set
-         */
-        if (txtArrivalDate.getText().toString().isEmpty()) {
-            txtArrivalDate.requestFocus();
-            txtArrivalDate.setError("Bitte Anreisedatum eingeben");
-        }
-        else {
-            myBooking.setArrival(dateFormatter.parse(txtArrivalDate.getText().toString()));
-        }
-
-        if (txtDepartureDate.getText().toString().isEmpty()) {
-            txtDepartureDate.requestFocus();
-            txtDepartureDate.setError("Bitte Abreisedatum eingeben");
-        }
-        else {
-            myBooking.setArrival(dateFormatter.parse(txtDepartureDate.getText().toString()));
-        }
-        myBookingHotel.setId(hotelId);
-        myBooking.setHotel(myBookingHotel);
+//        getFreeRoomsCollection();
 
 
         /**
@@ -175,16 +146,59 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
         int familyRoomCount = Integer.parseInt(txtFamilyRoomCount.getText().toString());
 
         int selectedRoomCount = singleRoomCount + doubleRoomCount + familyRoomCount;
-        if(Integer.parseInt(spn_personCount.getSelectedItem().toString()) < selectedRoomCount){
-           Toast.makeText(this, "Mehr Zimmer als Gäste!", Toast.LENGTH_SHORT).show();
+        if (Integer.parseInt(spn_personCount.getSelectedItem().toString()) < selectedRoomCount) {
+            Toast.makeText(this, "Mehr Zimmer als Gäste!", Toast.LENGTH_SHORT).show();
+        } else {
+            if (selectedRoomCount == 0) {
+                Toast.makeText(this, "Bitte Zimmeranzahl eintragen", Toast.LENGTH_SHORT).show();
+            }
         }
+
+        /**
+         * Check if arrival and departure dates are set
+         */
+        if (txtArrivalDate.getText().toString().isEmpty() || txtDepartureDate.getText().toString().isEmpty()) {
+
+
+            AlertDialog alertDialog;
+            alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Hotelinfo");
+            alertDialog.setMessage("Bitte Ankunfts- und Abreisedatum angeben!");
+            alertDialog.show();
+
+
+        }
+        else if (dateFormatter.parse(txtDepartureDate.getText().toString()).before(dateFormatter.parse(txtArrivalDate.getText().toString())))
+        {
+            AlertDialog alertDialog;
+            alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Falsche Datumsangabe");
+            alertDialog.setMessage("Abreisedatum muss nach dem Ankunftsdatum liegen!");
+            alertDialog.show();
+        }
+        else {
+            CurrentBooking.setArrival(dateFormatter.parse(txtArrivalDate.getText().toString()));
+            CurrentBooking.setDeparture(dateFormatter.parse(txtDepartureDate.getText().toString()));
+            myBookingHotel.setId(hotelId);
+            CurrentBooking.setHotel(myBookingHotel);
+            CurrentBooking.setgetSingleRoomCnt(singleRoomCount);
+            CurrentBooking.setDoubleRoomCnt(doubleRoomCount);
+            CurrentBooking.setFamilyRoomCnt(familyRoomCount);
+
+            try {
+                startActivity(intent);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
 
         /**
          * Check if data coming from server isn't empty and
          * there are enough rooms available for the selected room amount and
          * the selcted rooms have enough beds for the selected amount of guests
          */
-
+        /*
         if (!vacantRooms.isEmpty()) {
             int selectedRoomsBeds = singleRoomCount + (doubleRoomCount * 2) + (familyRoomCount * 5);
             int vacantSingle = 0;
@@ -228,22 +242,12 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
             alertDialog.setMessage("lol");
             alertDialog.show();
         }
+        */
 
-        /**
-         * Put room amount selction into extras for next activity action
-         */
-        intent.putExtra("singleRoomCount", singleRoomCount);
-
-        intent.putExtra("doubleRoomCount", doubleRoomCount);
-
-        intent.putExtra("familyRoomCount", familyRoomCount);
-
-        intent.putExtra("myBooking", myBooking);
 
         // TODO add all search relevant items to currentbooking
-        getFreeRoomsCollection();
 
-        startActivity(intent);
+
     }
 
     /**
@@ -260,8 +264,10 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
      *
      * @param view
      */
-    public void getDepartureDate(View view) {
+    public void getDepartureDate(View view) throws ParseException {
         showDatePicker((EditText) findViewById(R.id.txtDepartureDate));
+
+
         // TODO: Check if DepartureDate is before ArrivalDate!#
 
 
@@ -271,15 +277,17 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
     // region HelperMethods
 
     /**
-     * @param txtArrivalDate
+     * @param txtDate
      */
-    private void showDatePicker(final EditText txtArrivalDate) {
+    private void showDatePicker(final EditText txtDate) {
         Calendar calendar = Calendar.getInstance();
         new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                txtArrivalDate.setText(dateFormatter.format(newDate.getTime()));
+                txtDate.setText(dateFormatter.format(newDate.getTime()));
+
+
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
