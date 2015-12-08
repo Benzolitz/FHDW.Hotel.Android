@@ -35,6 +35,7 @@ import fhdw.hotel.DomainModel.CurrentBooking;
 import fhdw.hotel.DomainModel.Guest;
 import fhdw.hotel.DomainModel.Hotel;
 import fhdw.hotel.DomainModel.Room;
+import fhdw.hotel.DomainModel.Booking;
 import fhdw.hotel.R;
 
 public class SearchFormular extends AppCompatActivity implements IAsyncHotelListener, IAsyncGuestListener, IAsyncRoomListener {
@@ -66,6 +67,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
 
         getHotelCollection();
         selectedHotel = new ArrayList<>();
+        myBooking = new Booking();
 //        spn_cities.setOnItemSelectedListener(ListenOnHotelSpinner());
 
 //        insertGuestTest();
@@ -92,9 +94,10 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
     /**
      * @param view
      */
-    public void SearchRoomOnClick(View view) {
+    public void SearchRoomOnClick(View view) throws ParseException {
         Intent intent = new Intent(SearchFormular.this, RoomSelection.class);
-        myBooking = new Booking();
+
+
         /**
          * Check for selected city to get its id
          */
@@ -104,8 +107,9 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
                     hotelId = selectedHotel.get(i).getId();
                 }
             }
-
         }
+
+
 
         /**
          * Check if arrival and departure dates are set
@@ -114,11 +118,19 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
             txtArrivalDate.requestFocus();
             txtArrivalDate.setError("Bitte Anreisedatum eingeben");
         }
+        else {
+            myBooking.setArrival(dateFormatter.parse(txtArrivalDate.getText().toString()));
+        }
 
         if (txtDepartureDate.getText().toString().isEmpty()) {
             txtDepartureDate.requestFocus();
             txtDepartureDate.setError("Bitte Abreisedatum eingeben");
         }
+        else {
+            myBooking.setArrival(dateFormatter.parse(txtDepartureDate.getText().toString()));
+        }
+
+        myBooking.setHotel(new myBooking.Hotel().setId(hotelId));
 
 
         /**
