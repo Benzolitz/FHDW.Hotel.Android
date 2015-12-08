@@ -3,22 +3,21 @@ package fhdw.hotel.Activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -29,12 +28,15 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fhdw.hotel.BLL.Async.IListener.IAsyncGuestListener;
+import fhdw.hotel.DomainModel.CurrentBooking;
 import fhdw.hotel.DomainModel.Guest;
 import fhdw.hotel.R;
 
@@ -44,6 +46,9 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>, IAsyncGuestListener {
+    private String IntentExtraName = "CurrentBooking";
+    private CurrentBooking currentBooking;
+    private Gson gson;
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -73,7 +78,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = (AutoCompleteTextView) findViewById(R.id.txtEmail);
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -100,10 +105,17 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+
+        gson = new Gson();
+
+        String currentBookingString = (String) getIntent().getSerializableExtra(IntentExtraName);
+        currentBooking = gson.fromJson(currentBookingString, new TypeToken<CurrentBooking>(){}.getType());
     }
 
     public void GoToRegistrationOnClick(View view) {
         Intent intent = new Intent(Login.this, Register.class);
+        intent.putExtra(IntentExtraName, gson.toJson(currentBooking));
         startActivity(intent);
     }
 
@@ -287,13 +299,22 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
     public void CheckLoginComplete(Guest p_guest) {
         showProgress(false);
         if(p_guest != null){
-            Intent intent = new Intent(Login.this, SearchFormular.class);
+            Intent intent = new Intent(Login.this, CheckBooking.class);
+            currentBooking.setGuest(p_guest);
+            intent.putExtra(IntentExtraName, gson.toJson(currentBooking));
             startActivity(intent);
         }
         else{
-            // Login fehlgeschlagen
-            Toast.makeText(this, "Login Fehler", Toast.LENGTH_SHORT).show();
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Login fehlgeschlagen!");
+            alertDialog.setMessage("Bitte überprüfen Sie Ihre Logindaten.");
+            alertDialog.show();
         }
+    }
+
+    @Override
+    public void RegisterNewUserComplete(Guest p_guest) {
+
     }
 
     private interface ProfileQuery {

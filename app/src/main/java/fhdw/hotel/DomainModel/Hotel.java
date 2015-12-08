@@ -3,17 +3,17 @@ package fhdw.hotel.DomainModel;
 import java.util.ArrayList;
 
 public class Hotel {
-    public int Id;
+    public int ID;
     public String Name;
     public Address Address;
     public ArrayList<Room> Rooms;
 
     // region Getter & Setter
     public int getId() {
-        return Id;
+        return ID;
     }
     public void setId(int id) {
-        Id = id;
+        ID = id;
     }
 
     public String getName() {

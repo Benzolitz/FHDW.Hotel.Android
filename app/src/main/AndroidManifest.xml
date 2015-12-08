@@ -41,10 +41,6 @@
             android:name=".Activity.Booking"
             android:label="@string/title_activity_booking"></activity>
         <activity
-            android:name=".Activity.test_activity"
-            android:label="@string/title_activity_test_activity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
             android:name=".Activity.CheckBooking"
             android:label="@string/title_activity_check_booking"
             android:theme="@style/AppTheme.NoActionBar"></activity>

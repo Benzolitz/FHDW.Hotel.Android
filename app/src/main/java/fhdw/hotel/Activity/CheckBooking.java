@@ -11,27 +11,25 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import fhdw.hotel.DomainModel.CurrentBooking;
 import fhdw.hotel.R;
 
 public class CheckBooking extends AppCompatActivity {
-
-    LinearLayout llBookingOverview;
-    TextView test;
+    private String IntentExtraName = "CurrentBooking";
+    private CurrentBooking currentBooking;
+    private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_booking);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        llBookingOverview = (LinearLayout) findViewById(R.id.ll_my_booking);
-        test = (TextView) findViewById(R.id.test);
-        test.setText(CurrentBooking.toOutString());
 
-
-
+        gson = new Gson();
+        String currentBookingString = (String) getIntent().getSerializableExtra(IntentExtraName);
+        currentBooking = gson.fromJson(currentBookingString, new TypeToken<CurrentBooking>(){}.getType());
 
     }
-
 }

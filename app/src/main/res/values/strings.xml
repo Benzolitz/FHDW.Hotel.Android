@@ -5,7 +5,7 @@
     <string name="menu_action_login">Login</string>
 
     <string name="title_activity_prototype_suchform">Hotel App</string>
-    <string name="txt_suchen">Zimmer Suchen</string>
+    <string name="txt_suchen">Buchung ausführen</string>
     <string name="btn_hotelinfo">Info</string>
     <string name="endDate">Abreisedatum *</string>
     <string name="startDate">Anreisedatum *</string>
@@ -50,7 +50,7 @@
     <string name="action_sign_in">Einloggen</string>
     <string name="action_sign_in_short">Einloggen</string>
     <string name="action_register">Registrieren</string>
-    <string name="action_registerAndBooking">Registrieren und Buchen</string>
+    <string name="action_registerAndBooking">Registrieren</string>
 
     <string name="action_book">Buchen</string>
 
@@ -58,11 +58,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="hello">Hello World, HelloAccordion_JAVA!</string>
-    <!--<string name="app_name">HelloAccordion_JAVA</string>-->
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
 
     <color name="white">#ffffffff</color>
     <color name="black">#ff000000</color>

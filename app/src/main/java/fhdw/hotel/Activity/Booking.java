@@ -6,19 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.InputType;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,53 +27,58 @@ import fhdw.hotel.DomainModel.CurrentBooking;
 import fhdw.hotel.DomainModel.Guest;
 import fhdw.hotel.R;
 
-/**
- * Created by Artur Briem on 01.12.2015.
- */
 public class Booking extends Activity {
-    private SimpleDateFormat sdf;
-    EditText firstname;
-    EditText lastname;
-    EditText bday;
-    EditText street;
-    EditText plz;
-    EditText city;
-    CheckBox showBillingAdr;
-    LinearLayout billingAdr;
-    EditText billingStreet;
-    EditText billingPostalCode;
-    EditText billingCity;
-    Guest guest;
-    Address adr;
-    Address billingAddress;
+    private String IntentExtraName = "CurrentBooking";
+    private CurrentBooking currentBooking;
+    private Gson gson;
+
+    private SimpleDateFormat dateFormat;
+    private EditText txtFirstname;
+    private EditText txtLastname;
+    private EditText txtBirthday;
+
+    private EditText txtContactStreet;
+    private EditText txtContactPostalcode;
+    private EditText txtContactCity;
+
+    private CheckBox cbAddBillingAddress;
+    private LinearLayout llBillingAddress;
+
+    private EditText txtBillingStreet;
+    private EditText txtBillingPostalcode;
+    private EditText txtBillingCity;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
+        dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
 
 
-        firstname = (EditText) findViewById(R.id.txtFirstname);
-        lastname = (EditText) findViewById(R.id.txtLastname);
-        bday = (EditText) findViewById(R.id.dtpBirthday);
-        street = (EditText) findViewById(R.id.txtStreet);
-        plz = (EditText) findViewById(R.id.txtPostalcode);
-        city = (EditText) findViewById(R.id.txtCity);
-        showBillingAdr = (CheckBox) findViewById(R.id.cb_show_billing_adr);
-        showBillingAdr.setOnCheckedChangeListener(ShowBillingAdress());
-        billingAdr = (LinearLayout) findViewById(R.id.ll_billing_adr);
-        billingStreet = (EditText) findViewById(R.id.txtBillingStreet);
-        billingPostalCode = (EditText) findViewById(R.id.txtBillingPostalcode);
-        billingCity = (EditText) findViewById(R.id.txtBillingCity);
-        guest = new Guest();
-        adr = new Address();
-        billingAddress = new Address();
+        txtFirstname = (EditText) findViewById(R.id.txtFirstname);
+        txtLastname = (EditText) findViewById(R.id.txtLastname);
+        txtBirthday = (EditText) findViewById(R.id.dtpBirthday);
+
+        txtContactStreet = (EditText) findViewById(R.id.txtContactStreet);
+        txtContactPostalcode = (EditText) findViewById(R.id.txtContactPostalcode);
+        txtContactCity = (EditText) findViewById(R.id.txtContactCity);
+
+        cbAddBillingAddress = (CheckBox) findViewById(R.id.cbAddBillingAddress);
+        cbAddBillingAddress.setOnCheckedChangeListener(ShowBillingAdress());
+
+        llBillingAddress = (LinearLayout) findViewById(R.id.llBillingAddress);
+        txtBillingStreet = (EditText) findViewById(R.id.txtBillingStreet);
+        txtBillingPostalcode = (EditText) findViewById(R.id.txtBillingPostalcode);
+        txtBillingCity = (EditText) findViewById(R.id.txtBillingCity);
         removeKeypadFromDatePicker();
-        sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
 
+        gson = new Gson();
+        String currentBookingString = (String) getIntent().getSerializableExtra(IntentExtraName);
+        currentBooking = gson.fromJson(currentBookingString, new TypeToken<CurrentBooking>() {
+        }.getType());
     }
 
     private void removeKeypadFromDatePicker() {
-        bday.setInputType(InputType.TYPE_NULL);
+        txtBirthday.setInputType(InputType.TYPE_NULL);
     }
 
     /**
@@ -97,7 +99,7 @@ public class Booking extends Activity {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                txtDate.setText(sdf.format(newDate.getTime()));
+                txtDate.setText(dateFormat.format(newDate.getTime()));
 
 
             }
@@ -109,81 +111,73 @@ public class Booking extends Activity {
         return new CheckBox.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    billingAdr.setVisibility(View.VISIBLE);
+                if (isChecked) {
+                    llBillingAddress.setVisibility(View.VISIBLE);
                 }
                 if (!isChecked) {
-                    billingAdr.setVisibility(View.GONE);
+                    llBillingAddress.setVisibility(View.GONE);
                 }
             }
         };
     }
 
     public void OnClickBooking(View view) throws ParseException {
-        Intent intent = new Intent(Booking.this, CheckBooking.class);
-        if (firstname.getText().toString().isEmpty()) {
-            firstname.requestFocus();
-            firstname.setError("Darf nicht leer sein!");
+        Address contactAddress = new Address();
+        Address billingAddress = new Address();
+        Guest guest = new Guest();
+
+        if (txtFirstname.getText().toString().isEmpty()) {
+            txtFirstname.requestFocus();
+            txtFirstname.setError("Darf nicht leer sein!");
         } else {
-            guest.setFirstname(firstname.getText().toString());
+            guest.setFirstname(txtFirstname.getText().toString());
         }
 
-        if (lastname.getText().toString().isEmpty()) {
-            lastname.requestFocus();
-            lastname.setError("Darf nicht leer sein!");
+        if (txtLastname.getText().toString().isEmpty()) {
+            txtLastname.requestFocus();
+            txtLastname.setError("Darf nicht leer sein!");
         } else {
-            guest.setLastname(lastname.getText().toString());
+            guest.setLastname(txtLastname.getText().toString());
         }
 
-        if (!bday.getText().toString().isEmpty()) {
-            guest.setBirthday(sdf.parse(bday.getText().toString()));;
+        if (!txtBirthday.getText().toString().isEmpty()) {
+            guest.setBirthday(dateFormat.parse(txtBirthday.getText().toString()));
         }
 
-        if (!street.getText().toString().isEmpty()) {
-            adr.setStreet(street.getText().toString());
+        if (!txtContactStreet.getText().toString().isEmpty()) {
+            contactAddress.setStreet(txtContactStreet.getText().toString());
         }
 
-        if (!plz.getText().toString().isEmpty()) {
-            adr.setPostalCode(plz.getText().toString());
+        if (!txtContactPostalcode.getText().toString().isEmpty()) {
+            contactAddress.setPostalCode(txtContactPostalcode.getText().toString());
         }
 
-        if (!city.getText().toString().isEmpty()) {
-            adr.setPostalCode(city.getText().toString());
+        if (!txtContactCity.getText().toString().isEmpty()) {
+            contactAddress.setPostalCode(txtContactCity.getText().toString());
         }
+        if (cbAddBillingAddress.isChecked()) {
 
-        if (!billingStreet.getText().toString().isEmpty()) {
-            billingAddress.setPostalCode(billingStreet.getText().toString());
-        }
-        if (!billingCity.getText().toString().isEmpty()) {
-            billingAddress.setPostalCode(billingCity.getText().toString());
-        }
-        if (!billingPostalCode.getText().toString().isEmpty()) {
-            billingAddress.setPostalCode(billingPostalCode.getText().toString());
+            if (!txtBillingStreet.getText().toString().isEmpty()) {
+                billingAddress.setPostalCode(txtBillingStreet.getText().toString());
+            }
+            if (!txtBillingCity.getText().toString().isEmpty()) {
+                billingAddress.setPostalCode(txtBillingCity.getText().toString());
+            }
+            if (!txtBillingPostalcode.getText().toString().isEmpty()) {
+                billingAddress.setPostalCode(txtBillingPostalcode.getText().toString());
+            }
         }
 
         guest.setBillingAddress(billingAddress);
-        guest.setContactAddress(adr);
-        CurrentBooking.setGuest(guest);
+        guest.setContactAddress(contactAddress);
+        currentBooking.setGuest(guest);
 
+        Intent intent = new Intent(Booking.this, CheckBooking.class);
+        intent.putExtra(IntentExtraName, gson.toJson(currentBooking));
         startActivity(intent);
     }
 
-
     //region GUI-Methods
-
-    /**
-     * Inflate the menu; this adds items to the action bar if it is present.
-     *
-     * @param menu
-     * @return
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-
-        return true;
-    }
-
     /**
      * Handle action bar item clicks here. The action bar will automatically handle clicks on the Home/Up button, so long as you specify a parent activity in AndroidManifest.xml.
      *
@@ -202,5 +196,4 @@ public class Booking extends Activity {
         return super.onOptionsItemSelected(item);
     }
     //endregion
-
 }

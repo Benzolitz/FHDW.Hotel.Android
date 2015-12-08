@@ -9,265 +9,195 @@ import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
-import fhdw.hotel.BLL.Async.IListener.IAsyncGuestListener;
 import fhdw.hotel.BLL.Async.IListener.IAsyncHotelListener;
 import fhdw.hotel.BLL.Async.IListener.IAsyncRoomListener;
 import fhdw.hotel.DomainModel.CurrentBooking;
-import fhdw.hotel.DomainModel.Guest;
 import fhdw.hotel.DomainModel.Hotel;
 import fhdw.hotel.DomainModel.Room;
 import fhdw.hotel.R;
 
 public class SearchFormular extends AppCompatActivity implements IAsyncHotelListener, IAsyncRoomListener {
+    // region Member
+    private String IntentExtraName = "CurrentBooking";
+
     private SimpleDateFormat dateFormatter;
-    EditText txtDepartureDate;
-    EditText txtArrivalDate;
-    Spinner spn_cities;
-    Spinner spn_personCount;
-    ArrayList<Hotel> selectedHotel;
-    int hotelId;
-    ArrayList<Room> vacantRooms;
-    EditText singleRooms;
-    EditText doubleRooms;
-    EditText familyRooms;
 
-    Hotel myBookingHotel;
+    private CurrentBooking currentBooking;
 
-    // region Initialization
+    private Spinner spnCities;
+    private Spinner spnPersonCount;
 
-    /**
-     * @param savedInstanceState
-     */
+    private EditText txtArrivalDate;
+    private EditText txtDepartureDate;
+    private EditText txtSingleRoomCount;
+    private EditText txtDoubleRoomCount;
+    private EditText txtFamilyRoomCount;
+
+    private Hotel selectedHotel;
+    private ArrayList<Hotel> hotelList;
+
+    private ArrayList<Room> vacantRooms;
+
+    private Gson gson;
+    // endregion
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_search_formular);
 
-        dateFormatter = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
+        initializeMember();
         removeKeypadFromDatePicker();
-
         getHotelCollection();
-        selectedHotel = new ArrayList<>();
+    }
 
-        myBookingHotel = new Hotel();
+    private void initializeMember() {
+        gson = new Gson();
 
-//        insertGuestTest();
-        singleRooms = (EditText) findViewById(R.id.txtSingleRoomCount);
-        doubleRooms = (EditText) findViewById(R.id.txtDoubleRoomCount);
-        familyRooms = (EditText) findViewById(R.id.txtFamilyRoomCount);
-        spn_personCount = (Spinner) findViewById(R.id.spnPersonCount);
+        dateFormatter = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
+
+        currentBooking = new CurrentBooking();
+
+        spnCities = (Spinner) findViewById(R.id.spnCity);
+        spnCities.setOnItemSelectedListener(spnCitiesOnItemSelectedListener());
+
+        spnPersonCount = (Spinner) findViewById(R.id.spnPersonCount);
+
+        txtArrivalDate = (EditText) findViewById(R.id.txtArrivalDate);
+        txtDepartureDate = (EditText) findViewById(R.id.txtDepartureDate);
+        txtSingleRoomCount = (EditText) findViewById(R.id.txtSingleRoomCount);
+        txtDoubleRoomCount = (EditText) findViewById(R.id.txtDoubleRoomCount);
+        txtFamilyRoomCount = (EditText) findViewById(R.id.txtFamilyRoomCount);
+
+        selectedHotel = new Hotel();
+        hotelList = new ArrayList<>();
+
         vacantRooms = new ArrayList<>();
-        if (spn_cities != null) {
-            for (int i = 0; i < selectedHotel.size(); i++) {
-                if (spn_cities.getSelectedItem().toString().equals(selectedHotel.get(i).getAddress().getCity())) {
-                    hotelId = selectedHotel.get(i).getId();
-                }
-            }
+
+        String currentBookingString = (String) getIntent().getSerializableExtra(IntentExtraName);
+        if (currentBookingString != null && !currentBookingString.isEmpty()) {
+            currentBooking = gson.fromJson(currentBookingString, new TypeToken<CurrentBooking>() {
+            }.getType());
+            selectedHotel = currentBooking.getHotel();
+
+            int hotelIndex = hotelList.indexOf(selectedHotel);
+            if (hotelIndex != -1) spnCities.setSelection(hotelIndex);
+
+            spnPersonCount.setSelection(currentBooking.getPersonCount() - 1);
+
+            currentBooking = gson.fromJson(currentBookingString, new TypeToken<CurrentBooking>() {
+            }.getType());
+            txtArrivalDate.setText(currentBooking.getArrival().toString());
+            txtDepartureDate.setText(currentBooking.getDeparture().toString());
+            txtSingleRoomCount.setText(currentBooking.getSingleRoomCnt());
+            txtDoubleRoomCount.setText(currentBooking.getDoubleRoomCnt());
+            txtFamilyRoomCount.setText(currentBooking.getFamilyRoomCnt());
         }
     }
 
-    /**
-     * Set Type of Date Text Boxes to NULL, otherwise the keyboard will open every time focus is set to the input fields.
-     */
-    private void removeKeypadFromDatePicker() {
-        txtArrivalDate = (EditText) findViewById(R.id.txtArrivalDate);
-        txtDepartureDate = (EditText) findViewById(R.id.txtDepartureDate);
+    private void testBooking() {
+        // new fhdw.hotel.BLL.Async.Booking.SendBooking(this).execute(json);
+    }
 
+    private void removeKeypadFromDatePicker() {
         txtArrivalDate.setInputType(InputType.TYPE_NULL);
         txtDepartureDate.setInputType(InputType.TYPE_NULL);
     }
-    // endregion
-
-    // region onClickMethods
 
     public void ShowHotelInfo(View view) {
-        String strasse = "";
-        String plz = "";
-        String stadt = "";
-        String name = "";
-
-
-        for (int i = 0; i < selectedHotel.size(); i++) {
-            if (selectedHotel.get(i).getId() == hotelId) {
-                name = selectedHotel.get(i).getName();
-                strasse = selectedHotel.get(i).getAddress().getStreet();
-                plz = selectedHotel.get(i).getAddress().getPostalCode();
-                stadt = selectedHotel.get(i).getAddress().getCity();
-
-            }
-        }
+        String message = "";
+        message += "Hotelinformation:\n";
+        message += "Hier könnten Informationen zu dem Hotel stehen!\n\n";
+        message += "Adresse:\n";
+        message += "Hotel " + selectedHotel.Name + "\n";
+        message += selectedHotel.getAddress().getStreet() + "\n";
+        message += selectedHotel.getAddress().getPostalCode() + " " + selectedHotel.getAddress().getCity();
 
         AlertDialog alertDialog;
         alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Hotelinfo");
-        alertDialog.setMessage(name + "\n" + strasse + "\n" + stadt + " " + plz);
+        alertDialog.setTitle("Hotel " + selectedHotel.Name + " (" + selectedHotel.getAddress().getCity() + ")");
+        alertDialog.setMessage(message);
         alertDialog.show();
     }
 
-    /**
-     * @param view
-     */
     public void SearchRoomOnClick(View view) throws ParseException {
-        Intent intent = new Intent(SearchFormular.this, RegisterDescision.class);
-//        getFreeRoomsCollection();
+        boolean cancel = false;
 
-
-        /**
-         * Get values from room amount selection
-         */
-        EditText txtSingleRoomCount = (EditText) findViewById(R.id.txtSingleRoomCount);
         int singleRoomCount = Integer.parseInt(txtSingleRoomCount.getText().toString());
-
-        EditText txtDoubleRoomCount = (EditText) findViewById(R.id.txtDoubleRoomCount);
         int doubleRoomCount = Integer.parseInt(txtDoubleRoomCount.getText().toString());
-
-        EditText txtFamilyRoomCount = (EditText) findViewById(R.id.txtFamilyRoomCount);
         int familyRoomCount = Integer.parseInt(txtFamilyRoomCount.getText().toString());
 
-        int selectedRoomCount = singleRoomCount + doubleRoomCount + familyRoomCount;
-        if (Integer.parseInt(spn_personCount.getSelectedItem().toString()) < selectedRoomCount) {
-            Toast.makeText(this, "Mehr Zimmer als Gäste!", Toast.LENGTH_SHORT).show();
-        } else {
-            if (selectedRoomCount == 0) {
-                Toast.makeText(this, "Bitte Zimmeranzahl eintragen", Toast.LENGTH_SHORT).show();
-            }
+        int sumRoomCount = singleRoomCount + doubleRoomCount + familyRoomCount;
+        if (Integer.parseInt(spnPersonCount.getSelectedItem().toString()) < sumRoomCount) {
+            Toast.makeText(this, "Achtung! Sie haben mehr Zimmer als Gäste ausgewählt.", Toast.LENGTH_LONG);
+        } else if (sumRoomCount == 0) {
+            cancel = true;
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Zimmeranzahl");
+            alertDialog.setMessage("Sie müssen eine Anzahl von Zimmern eintragen!");
+            alertDialog.show();
         }
 
-        /**
-         * Check if arrival and departure dates are set
-         */
         if (txtArrivalDate.getText().toString().isEmpty() || txtDepartureDate.getText().toString().isEmpty()) {
-
-
-            AlertDialog alertDialog;
-            alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setTitle("Hotelinfo");
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Datum");
             alertDialog.setMessage("Bitte Ankunfts- und Abreisedatum angeben!");
             alertDialog.show();
-
-
-        }
-        else if (dateFormatter.parse(txtDepartureDate.getText().toString()).before(dateFormatter.parse(txtArrivalDate.getText().toString())))
-        {
-            AlertDialog alertDialog;
-            alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setTitle("Falsche Datumsangabe");
+            cancel = true;
+        } else if (dateFormatter.parse(txtDepartureDate.getText().toString()).before(dateFormatter.parse(txtArrivalDate.getText().toString()))) {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+            alertDialog.setTitle("Datum");
             alertDialog.setMessage("Abreisedatum muss nach dem Ankunftsdatum liegen!");
             alertDialog.show();
+            cancel = true;
+
         }
-        else {
-            CurrentBooking.setArrival(dateFormatter.parse(txtArrivalDate.getText().toString()));
-            CurrentBooking.setDeparture(dateFormatter.parse(txtDepartureDate.getText().toString()));
-            myBookingHotel.setId(hotelId);
-            CurrentBooking.setHotel(myBookingHotel);
-            CurrentBooking.setgetSingleRoomCnt(singleRoomCount);
-            CurrentBooking.setDoubleRoomCnt(doubleRoomCount);
-            CurrentBooking.setFamilyRoomCnt(familyRoomCount);
-            CurrentBooking.setPersonCnt(spn_personCount.getSelectedItem().toString());
+
+        if (!cancel) {
+            currentBooking.setArrival(dateFormatter.parse(txtArrivalDate.getText().toString()));
+            currentBooking.setDeparture(dateFormatter.parse(txtDepartureDate.getText().toString()));
+            currentBooking.setHotel(selectedHotel);
+            currentBooking.setPersonCount(spnCities.getSelectedItemPosition() + 1);
+            currentBooking.setSingleRoomCnt(singleRoomCount);
+            currentBooking.setDoubleRoomCnt(doubleRoomCount);
+            currentBooking.setFamilyRoomCnt(familyRoomCount);
 
             try {
+                Intent intent = new Intent(SearchFormular.this, RegisterDescision.class);
+                intent.putExtra(IntentExtraName, gson.toJson(currentBooking));
                 startActivity(intent);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
-
-        /**
-         * Check if data coming from server isn't empty and
-         * there are enough rooms available for the selected room amount and
-         * the selcted rooms have enough beds for the selected amount of guests
-         */
-        /*
-        if (!vacantRooms.isEmpty()) {
-            int selectedRoomsBeds = singleRoomCount + (doubleRoomCount * 2) + (familyRoomCount * 5);
-            int vacantSingle = 0;
-            int vacantDouble = 0;
-            int vacantFamily = 0;
-
-            for (int i = 0; i < vacantRooms.size(); i++) {
-                String roomType = vacantRooms.get(i).getType().toString();
-
-                switch (roomType) {
-                    case "Single":
-                        vacantSingle++;
-                        break;
-                    case "Double":
-                        vacantDouble++;
-                        break;
-                    case "Family":
-                        vacantFamily++;
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-
-
-            if (vacantSingle != singleRoomCount || vacantDouble != doubleRoomCount || vacantFamily != familyRoomCount) {
-                //prompt that there are not enough rooms
-
-                AlertDialog alertDialog;
-                alertDialog = new AlertDialog.Builder(this).create();
-                alertDialog.setTitle("Nicht genug der gewünschten Zimmertypen vorhanden!");
-                alertDialog.setMessage("Noch verfügbar:\n " + vacantSingle + " Einzelzimmer,\n" + vacantDouble + " Doppelzimmer,\n" + vacantFamily + "Familienzimmer");
-                alertDialog.show();
-
-            }
-        } else {
-            AlertDialog alertDialog;
-            alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setTitle("Keine Zimmer Frei!");
-            alertDialog.setMessage("lol");
-            alertDialog.show();
-        }
-        */
-
-
-        // TODO add all search relevant items to currentbooking
-
-
     }
 
-    /**
-     * Show the Datepicker and set the selected date into the arrival textbox.
-     *
-     * @param view
-     */
     public void getArrivalDate(View view) {
         showDatePicker((EditText) findViewById(R.id.txtArrivalDate));
     }
 
-    /**
-     * Show the Datepicker, check the date and set the selected date into the departure textbox.
-     *
-     * @param view
-     */
     public void getDepartureDate(View view) throws ParseException {
         showDatePicker((EditText) findViewById(R.id.txtDepartureDate));
 
     }
-    // endregion
 
-    // region HelperMethods
-
-    /**
-     * @param txtDate
-     */
     private void showDatePicker(final EditText txtDate) {
         Calendar calendar = Calendar.getInstance();
         new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -280,34 +210,31 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
-    // endregion
 
-    //region GUI-Methods
+    private AdapterView.OnItemSelectedListener spnCitiesOnItemSelectedListener() {
+        return new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                for (int i = 0; i < hotelList.size(); i++) {
+                    if (!spnCities.getSelectedItem().toString().equals(hotelList.get(i).getAddress().getCity()))
+                        continue;
+                    selectedHotel = hotelList.get(i);
+                }
+            }
 
-    /**
-     * Inflate the menu; this adds items to the action bar if it is present.
-     *
-     * @param menu
-     * @return
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        return true;
+            }
+        };
     }
 
-    /**
-     * Handle action bar item clicks here. The action bar will automatically handle clicks on the Home/Up button, so long as you specify a parent activity in AndroidManifest.xml.
-     *
-     * @param item
-     * @return
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.login_action:
                 Intent intent = new Intent(this, Login.class);
+                intent.putExtra(IntentExtraName, gson.toJson(currentBooking));
                 this.startActivity(intent);
                 break;
             default:
@@ -317,29 +244,26 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
         return true;
     }
 
-    //endregion
-
-    // region Async-Methods
-    public void getHotelCollection() {
+    private void getHotelCollection() {
         new fhdw.hotel.BLL.Async.Hotel.GetCollection(this).execute();
     }
 
     @Override
     public void GetHotelCollectionComplete(ArrayList<Hotel> p_result) {
-        if (p_result == null) return;
+        if (p_result == null || p_result.size() == 0) return;
+        hotelList = p_result;
+        selectedHotel = hotelList.get(0);
 
         ArrayList<String> adrLst = new ArrayList<>();
 
-        for (int i = 0; i < p_result.size(); i++) {
-            selectedHotel.add(p_result.get(i));
-            adrLst.add(p_result.get(i).toString());
+        for (int i = 0; i < hotelList.size(); i++) {
+            adrLst.add(hotelList.get(i).toString());
         }
-        spn_cities = (Spinner) findViewById(R.id.spnCity);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, adrLst);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spn_cities.setAdapter(adapter);
+        spnCities.setAdapter(adapter);
     }
 
     @Override
@@ -357,5 +281,4 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
     public void GetRoom(Room p_result) {
 
     }
-    // endregion
 }
