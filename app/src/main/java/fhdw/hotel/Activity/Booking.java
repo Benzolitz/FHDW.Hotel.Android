@@ -35,7 +35,9 @@ public class Booking extends Activity {
     private SimpleDateFormat dateFormat;
     private EditText txtFirstname;
     private EditText txtLastname;
+
     private EditText txtBirthday;
+    private EditText txtBirthplace;
 
     private EditText txtContactStreet;
     private EditText txtContactPostalcode;
@@ -57,6 +59,7 @@ public class Booking extends Activity {
         txtFirstname = (EditText) findViewById(R.id.txtFirstname);
         txtLastname = (EditText) findViewById(R.id.txtLastname);
         txtBirthday = (EditText) findViewById(R.id.dtpBirthday);
+        txtBirthplace = (EditText) findViewById(R.id.txtBirthplace);
 
         txtContactStreet = (EditText) findViewById(R.id.txtContactStreet);
         txtContactPostalcode = (EditText) findViewById(R.id.txtContactPostalcode);
@@ -140,6 +143,20 @@ public class Booking extends Activity {
             guest.setLastname(txtLastname.getText().toString());
         }
 
+        if (txtBirthday.getText().toString().isEmpty()) {
+            txtBirthday.requestFocus();
+            txtBirthday.setError("Darf nicht leer sein!");
+        } else {
+            guest.setBirthday(dateFormat.parse(txtBirthday.getText().toString()));
+        }
+
+        if (txtBirthplace.getText().toString().isEmpty()) {
+            txtBirthplace.requestFocus();
+            txtBirthplace.setError("Darf nicht leer sein!");
+        } else {
+            guest.setBirthplace(txtBirthplace.getText().toString());
+        }
+
         if (!txtBirthday.getText().toString().isEmpty()) {
             guest.setBirthday(dateFormat.parse(txtBirthday.getText().toString()));
         }
@@ -153,7 +170,7 @@ public class Booking extends Activity {
         }
 
         if (!txtContactCity.getText().toString().isEmpty()) {
-            contactAddress.setPostalCode(txtContactCity.getText().toString());
+            contactAddress.setCity(txtContactCity.getText().toString());
         }
         if (cbAddBillingAddress.isChecked()) {
 
@@ -166,6 +183,9 @@ public class Booking extends Activity {
             if (!txtBillingPostalcode.getText().toString().isEmpty()) {
                 billingAddress.setPostalCode(txtBillingPostalcode.getText().toString());
             }
+        }else
+        {
+            billingAddress = null;
         }
 
         guest.setBillingAddress(billingAddress);
