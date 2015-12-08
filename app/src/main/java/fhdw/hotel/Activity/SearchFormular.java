@@ -79,7 +79,13 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
         familyRooms = (EditText) findViewById(R.id.txtFamilyRoomCount);
         spn_personCount = (Spinner) findViewById(R.id.spnPersonCount);
         vacantRooms = new ArrayList<>();
-
+        if (spn_cities != null) {
+            for (int i = 0; i < selectedHotel.size(); i++) {
+                if (spn_cities.getSelectedItem().toString().equals(selectedHotel.get(i).getAddress().getCity())) {
+                    hotelId = selectedHotel.get(i).getId();
+                }
+            }
+        }
     }
 
     /**
@@ -97,10 +103,26 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
     // region onClickMethods
 
     public void ShowHotelInfo(View view) {
+        String strasse = "";
+        String plz= "";
+        String stadt = "";
+        String name = "";
+
+
+        for(int i = 0; i < selectedHotel.size(); i++) {
+            if(selectedHotel.get(i).getId() == hotelId) {
+                name = selectedHotel.get(i).getName();
+                strasse = selectedHotel.get(i).getAddress().getStreet();
+                plz = selectedHotel.get(i).getAddress().getPostalCode();
+                stadt = selectedHotel.get(i).getAddress().getCity();
+
+            }
+        }
+
         AlertDialog alertDialog;
         alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Hotelinfo");
-        alertDialog.setMessage("");
+        alertDialog.setMessage(name + "\n" + strasse + "\n" + stadt + " " + plz);
         alertDialog.show();
     }
 
@@ -114,13 +136,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
         /**
          * Check for selected city to get its id
          */
-        if (spn_cities != null) {
-            for (int i = 0; i < selectedHotel.size(); i++) {
-                if (spn_cities.getSelectedItem().toString().equals(selectedHotel.get(i).getAddress().getCity())) {
-                    hotelId = selectedHotel.get(i).getId();
-                }
-            }
-        }
+
 
 
 
