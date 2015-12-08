@@ -48,6 +48,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
     EditText singleRooms;
     EditText doubleRooms;
     EditText familyRooms;
+    Booking myBooking;
 
     // region Initialization
 
@@ -93,7 +94,7 @@ public class SearchFormular extends AppCompatActivity implements IAsyncHotelList
      */
     public void SearchRoomOnClick(View view) {
         Intent intent = new Intent(SearchFormular.this, RoomSelection.class);
-
+        myBooking = new Booking();
         /**
          * Check for selected city to get its id
          */

@@ -1,9 +1,10 @@
 package fhdw.hotel.DomainModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Booking {
+public class Booking implements Serializable{
     public int Id;
     public Date Arrival;
     public Date Departure;
