@@ -1,18 +1,25 @@
 package fhdw.hotel.Activity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
 
 import fhdw.hotel.BLL.Async.IListener.IAsyncGuestListener;
@@ -40,6 +47,11 @@ public class Register extends AppCompatActivity implements IAsyncGuestListener {
     private EditText txtContactCity;
     private EditText txtContactPostalcode;
 
+    private CheckBox cbAddBillingAddress;
+    private LinearLayout llBillingAddress;
+    private EditText txtBillingStreet;
+    private EditText txtBillingPostalcode;
+    private EditText txtBillingCity;
 
     /**
      * @param savedInstanceState
@@ -63,10 +75,56 @@ public class Register extends AppCompatActivity implements IAsyncGuestListener {
         txtContactCity = (EditText) findViewById(R.id.txtContactCity);
         txtContactPostalcode = (EditText) findViewById(R.id.txtPostlcode);
 
+        llBillingAddress = (LinearLayout) findViewById(R.id.llBillingAddress);
+        txtBillingStreet = (EditText) findViewById(R.id.txtBillingStreet);
+        txtBillingPostalcode = (EditText) findViewById(R.id.txtBillingPostalcode);
+        txtBillingCity = (EditText) findViewById(R.id.txtBillingCity);
+
+        cbAddBillingAddress = (CheckBox) findViewById(R.id.cbAddBillingAddress);
+        cbAddBillingAddress.setOnCheckedChangeListener(ShowBillingAdress());
+
         gson = new Gson();
         String currentBookingString = (String) getIntent().getSerializableExtra(IntentExtraName);
         currentBooking = gson.fromJson(currentBookingString, new TypeToken<CurrentBooking>() {
         }.getType());
+    }
+
+
+    /**
+     * Show the Datepicker and set the selected date into the birthday textbox.
+     *
+     * @param view
+     */
+    public void getDate(View view) {
+        showDatePicker(txtBirthday);
+    }
+
+    /**
+     * @param txtDate
+     */
+    private void showDatePicker(final EditText txtDate) {
+        Calendar calendar = Calendar.getInstance();
+        new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                txtDate.setText(dateFormatter.format(newDate.getTime()));
+            }
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+    }
+    @NonNull
+    private CheckBox.OnCheckedChangeListener ShowBillingAdress() {
+        return new CheckBox.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    llBillingAddress.setVisibility(View.VISIBLE);
+                }
+                if (!isChecked) {
+                    llBillingAddress.setVisibility(View.GONE);
+                }
+            }
+        };
     }
 
     public void RegisterNewUser(View v) throws ParseException {

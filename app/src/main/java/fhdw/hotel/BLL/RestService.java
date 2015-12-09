@@ -20,7 +20,8 @@ import java.util.ArrayList;
 
 public class RestService {
     // private static String serverUrl = "http://192.168.2.104:35588/api/";
-    private static String serverUrl = "http://192.168.178.30:35588/api/";
+    // private static String serverUrl = "http://192.168.178.30:35588/api/";
+    private static String serverUrl = "http://192.168.43.125:35588/api/";
 
     // region Web-Methods
     public static String Get(String p_controller, ArrayList<Pair<String, String>> p_urlParameters) throws IOException {

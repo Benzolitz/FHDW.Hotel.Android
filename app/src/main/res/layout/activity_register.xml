@@ -58,7 +58,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/txtFirstname"
-            android:hint="@string/prompt_birthdate"
+            android:focusable="false"
+            android:onClick="getDate"
+            android:hint="* Geburtstag"
             android:inputType="date" />
 
         <EditText
@@ -67,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/txtBirthday"
-            android:hint="Geburtort"
+            android:hint="* Geburtort"
             android:inputType="text" />
 
         <EditText
@@ -85,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/txtTelephone"
-            android:hint="Straße"
+            android:hint="* Straße"
             android:inputType="text" />
 
 
@@ -103,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/ll_town_plz"
                 android:layout_centerHorizontal="true"
-                android:hint="@string/prompt_plz"
+                android:hint="* PLZ"
                 android:inputType="number" />
 
             <EditText
@@ -111,10 +113,59 @@
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:hint="@string/prompt_city"
+                android:hint="* Ort"
                 android:inputType="text" />
 
         </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/cbAddBillingAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_town_plz"
+            android:text="@string/prompt_show_billing_adr" />
+        <!-- invisible content-->
+        <LinearLayout
+            android:id="@+id/llBillingAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cbAddBillingAddress"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+
+            <EditText
+                android:id="@+id/txtBillingStreet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_street"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+
+            <EditText
+                android:id="@+id/txtBillingPostalcode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_plz"
+                android:inputType="number"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+
+            <EditText
+                android:id="@+id/txtBillingCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_city"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+
+        </LinearLayout>
+        <!-- Invisible content end -->
 
         <EditText
             android:id="@+id/txtPassword"
@@ -122,7 +173,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/ll_town_plz"
+            android:layout_below="@+id/llBillingAddress"
             android:hint="@string/prompt_password"
             android:inputType="textPassword" />
 
