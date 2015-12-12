@@ -24,6 +24,16 @@ public class RestService {
     private static String serverUrl = "http://192.168.43.125:35588/api/";
 
     // region Web-Methods
+
+    /**
+     * Send GET Requests to the Server
+     * @param p_controller
+     * Controllername
+     * @param p_urlParameters
+     * A List of Parameters
+     * @return Serveranswer as JSON
+     * @throws IOException
+     */
     public static String Get(String p_controller, ArrayList<Pair<String, String>> p_urlParameters) throws IOException {
         URL url = createURL(p_controller, p_urlParameters);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -50,6 +60,15 @@ public class RestService {
         }
     }
 
+    /**
+     * Send POST Requests to the Server
+     * @param p_controller
+     * Controllername
+     * @param p_urlParameters
+     * List of Parameters
+     * @return Serveranswer as JSON
+     * @throws Exception
+     */
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public static String Post(String p_controller, ArrayList<Pair<String, String>> p_urlParameters) throws Exception {
         if (p_urlParameters == null || p_urlParameters.size() == 0) throw new Exception("One Parameter is required!");
@@ -90,6 +109,15 @@ public class RestService {
         }
     }
 
+    /**
+     * Send PUT Requests to the Server
+     * @param p_controller
+     * Controllername
+     * @param p_urlParameters
+     * List of Parameters
+     * @return Serveranswer as JSON
+     * @throws Exception
+     */
     public static String Put(String p_controller, ArrayList<Pair<String, String>> p_urlParameters) throws Exception {
         if (p_urlParameters == null || p_urlParameters.size() == 0) throw new Exception("One Parameter is required!");
 

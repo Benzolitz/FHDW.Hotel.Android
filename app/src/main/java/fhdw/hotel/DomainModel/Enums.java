@@ -1,7 +1,14 @@
 package fhdw.hotel.DomainModel;
 
+/**
+ * All Enums needed for the models
+ * @author Lucas Engel
+ */
 public class Enums
 {
+    /**
+     * Roomtype
+     */
     public enum RoomType {
         Single, Double, Family
     }
@@ -20,6 +27,9 @@ public class Enums
         }
     }
 
+    /**
+     * Roomcategory
+     */
     public enum RoomCategory {
         Standard, Luxus, Superior
     }

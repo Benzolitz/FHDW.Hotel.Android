@@ -14,6 +14,10 @@ import fhdw.hotel.BLL.Async.IListener.IAsyncGuestListener;
 import fhdw.hotel.BLL.RestService;
 import fhdw.hotel.DomainModel.Guest;
 
+/**
+ * @author Lucas Engel
+ * Send a new Guest to the Server
+ */
 public class RegisterNewUser extends AsyncTask<String, Void, Guest> {
     IAsyncGuestListener callback;
 

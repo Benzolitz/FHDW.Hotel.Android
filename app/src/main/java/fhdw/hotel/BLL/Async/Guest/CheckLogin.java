@@ -14,6 +14,10 @@ import fhdw.hotel.BLL.Async.IListener.IAsyncGuestListener;
 import fhdw.hotel.BLL.RestService;
 import fhdw.hotel.DomainModel.Guest;
 
+/**
+ * @author Lucas Engel
+ * Check if the given logindata is correct.
+ */
 public class CheckLogin extends AsyncTask<String, Void, Guest> {
     private IAsyncGuestListener callback;
 

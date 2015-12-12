@@ -2,13 +2,44 @@ package fhdw.hotel.DomainModel;
 
 import java.io.Serializable;
 
+/**
+ * Roommodel
+ * @author Lucas Engel
+ */
 public class Room implements Serializable{
+    /**
+     * ID of the Room
+     */
     public int Id;
+
+    /**
+     * RoomNumber of the Room
+     */
     public String RoomNumber;
+
+    /**
+     * Category of the Room
+     */
     public Enums.RoomCategory Category;
+
+    /**
+     * Type of the Room
+     */
     public Enums.RoomType Type;
+
+    /**
+     * PersonCount of the Room
+     */
     public int PersonCount;
+
+    /**
+     * Price of the Room
+     */
     public float Price;
+
+    /**
+     * Hotel of the Room
+     */
     public Hotel Hotel;
 
     // region Getter & Setter

@@ -2,16 +2,59 @@ package fhdw.hotel.DomainModel;
 
 import java.util.Date;
 
+/**
+ * Guestmodel
+ * @author Lucas Engel
+ */
 public class Guest {
+    /**
+     * ID of the Guest
+     */
     public int Id;
+
+    /**
+     * Firstname of the Guest
+     */
     public String Firstname;
+
+    /**
+     * Lastname of the Guest
+     */
     public String Lastname;
+
+    /**
+     * Emailaddress of the Guest
+     */
     public String Emailaddress;
+
+    /**
+     * Password of the Guest
+     */
     public String Password;
+
+    /**
+     * Birthday of the Guest
+     */
     public Date Birthday;
+
+    /**
+     * Birthplace of the Guest
+     */
     public String Birthplace;
+
+    /**
+     * ContactAddress of the Guest
+     */
     public Address ContactAddress;
+
+    /**
+     * BillingAddress of the Guest
+     */
     public Address BillingAddress;
+
+    /**
+     * Telephone of the Guest
+     */
     public String Telephone;
 
     // region Getter & Setter

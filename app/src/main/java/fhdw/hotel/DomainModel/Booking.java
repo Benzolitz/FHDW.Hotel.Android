@@ -4,12 +4,39 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Bookingmodel
+ * @author Lucas Engel
+ */
 public class Booking implements Serializable{
+    /**
+     * ID of the Booking
+     */
     public int Id;
+
+    /**
+     * Arrivaldate of the Booking
+     */
     public Date Arrival;
+
+    /**
+     * Departuredate of the Booking
+     */
     public Date Departure;
+
+    /**
+     * Guest of the Booking
+     */
     public Guest Guest;
+
+    /**
+     * Hotel of the Booking
+     */
     public Hotel Hotel;
+
+    /**
+     * Rooms of the Booking
+     */
     public ArrayList<Room> Rooms;
 
     // region Getter & Setter

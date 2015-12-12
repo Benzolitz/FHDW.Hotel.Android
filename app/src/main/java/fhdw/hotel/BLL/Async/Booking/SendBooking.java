@@ -14,6 +14,10 @@ import fhdw.hotel.BLL.Async.IListener.IAsyncBookingListener;
 import fhdw.hotel.BLL.RestService;
 import fhdw.hotel.DomainModel.Booking;
 
+/**
+ * @author Lucas Engel
+ * Send a new ooking to the Server
+ */
 public class SendBooking extends AsyncTask<String, Void, Booking> {
     private IAsyncBookingListener callback;
 

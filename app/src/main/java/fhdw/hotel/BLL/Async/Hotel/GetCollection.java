@@ -13,6 +13,10 @@ import fhdw.hotel.BLL.Async.IListener.IAsyncHotelListener;
 import fhdw.hotel.BLL.RestService;
 import fhdw.hotel.DomainModel.Hotel;
 
+/**
+ * @author Lucas Engel
+ * Get a Collection of all Hotels
+ */
 public class GetCollection extends AsyncTask<String, Void, ArrayList<Hotel>> {
     private IAsyncHotelListener callback;
 

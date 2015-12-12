@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 import fhdw.hotel.DomainModel.Hotel;
 
+/**
+ * @author Lucas Engel
+ * Interface for all Hotel related requests.
+ */
 public interface IAsyncHotelListener {
     String Controller = "Hotel";
 

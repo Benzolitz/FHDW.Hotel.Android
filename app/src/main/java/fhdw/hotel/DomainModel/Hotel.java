@@ -2,10 +2,29 @@ package fhdw.hotel.DomainModel;
 
 import java.util.ArrayList;
 
+/**
+ * Hotelmodel
+ * @author Lucas Engel
+ */
 public class Hotel {
+    /**
+     * ID of the Hotel
+     */
     public int ID;
+
+    /**
+     * Name of the Hotel
+     */
     public String Name;
+
+    /**
+     * Address of the Hotel
+     */
     public Address Address;
+
+    /**
+     * Rooms of the Hotel
+     */
     public ArrayList<Room> Rooms;
 
     // region Getter & Setter
