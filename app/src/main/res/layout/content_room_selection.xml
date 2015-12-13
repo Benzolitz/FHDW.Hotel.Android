@@ -10,6 +10,7 @@
     android:weightSum="1"
     tools:context="fhdw.hotel.Activity.room_selection">
 
+    <!-- Dynamically filled accordion-view according to the selected amount of rooms, the user wants to book-->
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

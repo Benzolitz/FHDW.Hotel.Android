@@ -26,6 +26,11 @@ import fhdw.hotel.DomainModel.Enums;
 import fhdw.hotel.DomainModel.Room;
 import fhdw.hotel.R;
 
+/**
+ * Class is not included in the Project now,
+ * freezed for the next implementation to select room cathegory,
+ * beside the other room criteria in the searchFormular
+ */
 public class RoomSelection extends Activity implements IAsyncRoomListener {
 
     LinearLayout rooms;
@@ -47,6 +52,12 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
         fillRoomList(singleRoomCount, doubleRoomCount, familyRoomCount);
     }
 
+    /**
+     * Fills the room list by the pre selected room count in searchFormular
+     * @param p_singleRoomCount
+     * @param p_doubleRoomCount
+     * @param p_familyRoomCount
+     */
     private void fillRoomList(int p_singleRoomCount, int p_doubleRoomCount, int p_familyRoomCount) {
         ArrayList<Room> allRooms = getRoomList(p_singleRoomCount, p_doubleRoomCount, p_familyRoomCount);
 
@@ -68,6 +79,12 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
         return llRoomInformation;
     }
 
+    /**
+     * Settings for the accordeon buttons
+     * @param p_id
+     * @param p_currentRoom
+     * @return
+     */
     private View getAccordionButton(int p_id, Room p_currentRoom) {
         Button btnAccordion;
         btnAccordion = new Button(this);
@@ -81,6 +98,12 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
         return btnAccordion;
     }
 
+    /**
+     * Settings for the imageView of the room pictures
+     * @param p_id
+     * @param p_room
+     * @return
+     */
     private View getImageView(int p_id, Room p_room) {
         ImageView hotelImgView = new ImageView(this);
         hotelImgView.setVisibility(View.VISIBLE);
@@ -90,6 +113,11 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
         return hotelImgView;
     }
 
+    /**
+     * selects the room picture according to the selected room
+     * @param p_room
+     * @return
+     */
     private int getRoomImage(Room p_room) {
         switch (p_room.Type) {
             case Single:
@@ -168,6 +196,11 @@ public class RoomSelection extends Activity implements IAsyncRoomListener {
         return roomList;
     }
 
+    /**
+     * Sets the accordion contents
+     * @param p_id
+     * @return
+     */
     private View getRoomTypeSelection(int p_id) {
         RadioGroup radGroupRoomType = new RadioGroup(this);
         radGroupRoomType.setOrientation(RadioGroup.HORIZONTAL);

@@ -127,6 +127,11 @@ public class Register extends AppCompatActivity implements IAsyncGuestListener {
         };
     }
 
+    /**
+     * Validation routines for input fields
+     * @param v
+     * @throws ParseException
+     */
     public void RegisterNewUser(View v) throws ParseException {
         boolean error = false;
 

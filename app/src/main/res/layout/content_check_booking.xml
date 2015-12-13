@@ -12,6 +12,7 @@
     tools:context=".Activity.CheckBooking"
     tools:showIn="@layout/activity_check_booking">
 
+    <!-- The view shows the booking informations, chosen by the user-->
     <LinearLayout
         android:id="@+id/ll_my_booking"
         android:layout_width="wrap_content"
@@ -32,6 +33,7 @@
             android:layout_below="@+id/txvBookingOverview"
             android:id="@+id/txvBookingInformation"/>
 
+        <!-- button to complete the booking-->
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

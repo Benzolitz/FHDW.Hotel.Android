@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- Contents of the Booking page-->
     <ScrollView
         android:id="@+id/sv_booking"
         android:layout_width="match_parent"
@@ -35,7 +36,7 @@
                 android:textStyle="bold"
                 android:typeface="sans" />
 
-
+            <!-- input field for the firstname, required and checked in the Activity javacode-->
             <EditText
                 android:id="@+id/txtFirstname"
                 android:layout_width="match_parent"
@@ -45,7 +46,7 @@
                 android:maxLines="1"
                 android:singleLine="true" />
 
-
+            <!-- input fielld for lastname, required-->
             <EditText
                 android:id="@+id/txtLastname"
                 android:layout_width="match_parent"
@@ -56,26 +57,27 @@
                 android:singleLine="true" />
 
 
-
+            <!-- input field for birthday-->
             <EditText
                 android:id="@+id/dtpBirthday"
-                android:hint="@string/prompt_birthdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:focusable="false"
+                android:hint="@string/prompt_birthdate"
                 android:inputType="date"
                 android:onClick="getArrivalDate" />
 
+            <!-- inputfield for birthplace-->
             <EditText
                 android:id="@+id/txtBirthplace"
-                android:hint="* Geburtsort"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="* Geburtsort"
                 android:inputType="text" />
 
-
+            <!-- input field for the streetname and house No. of the user-->
             <EditText
                 android:id="@+id/txtContactStreet"
                 android:layout_width="match_parent"
@@ -85,7 +87,7 @@
                 android:maxLines="1"
                 android:singleLine="true" />
 
-
+            <!-- input field for the postal code of the users city-->
             <EditText
                 android:id="@+id/txtContactPostalcode"
                 android:layout_width="match_parent"
@@ -95,7 +97,7 @@
                 android:maxLines="1"
                 android:singleLine="true" />
 
-
+            <!-- input field for the streetname of the user-->
             <EditText
                 android:id="@+id/txtContactCity"
                 android:layout_width="match_parent"
@@ -105,13 +107,14 @@
                 android:maxLines="1"
                 android:singleLine="true" />
 
-
-             <CheckBox
-            android:id="@+id/cbAddBillingAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <!-- input checkbox for showing inputs for an additional billing adress-->
+            <CheckBox
+                android:id="@+id/cbAddBillingAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/prompt_show_billing_adr" />
-            <!-- invisible content-->
+
+            <!-- invisible content till checkbox above is checked-->
             <LinearLayout
                 android:id="@+id/llBillingAddress"
                 android:layout_width="match_parent"
@@ -119,7 +122,7 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-
+                <!-- input field for the billing streetname & house No. of the user-->
                 <EditText
                     android:id="@+id/txtBillingStreet"
                     android:layout_width="match_parent"
@@ -129,7 +132,7 @@
                     android:maxLines="1"
                     android:singleLine="true" />
 
-
+                <!-- input field for the postalcode of the users city-->
                 <EditText
                     android:id="@+id/txtBillingPostalcode"
                     android:layout_width="match_parent"
@@ -139,7 +142,7 @@
                     android:maxLines="1"
                     android:singleLine="true" />
 
-
+                <!-- input field for the cityname of the user-->
                 <EditText
                     android:id="@+id/txtBillingCity"
                     android:layout_width="match_parent"
@@ -152,6 +155,8 @@
 
             </LinearLayout>
             <!-- Invisible content end -->
+
+            <!-- submit booking button-->
             <Button
                 android:id="@+id/btn_submit_booking"
                 style="?android:textAppearanceSmall"

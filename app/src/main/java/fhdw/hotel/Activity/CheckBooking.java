@@ -44,6 +44,10 @@ public class CheckBooking extends AppCompatActivity implements IAsyncBookingList
         addTextToBookingInformation();
     }
 
+    /**
+     * Adds dynamically booking information to the overview
+     *
+     */
     private void addTextToBookingInformation() {
         double sumSingle = currentBooking.getSingleRoomCnt() * 11.11;
         double sumDouble = currentBooking.getDoubleRoomCnt() * 22.22;
@@ -69,6 +73,10 @@ public class CheckBooking extends AppCompatActivity implements IAsyncBookingList
         txvBookingInformation.setText(bookingInformation);
     }
 
+    /**
+     *
+     * @param view
+     */
     public void RegisterNewBooking(View view) {
         new fhdw.hotel.BLL.Async.Booking.SendBooking(this).execute(gson.toJson(currentBooking));
     }

@@ -113,6 +113,10 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
         currentBooking = gson.fromJson(currentBookingString, new TypeToken<CurrentBooking>(){}.getType());
     }
 
+    /**
+     * Listener for the registrationbutton on login view
+     * @param view
+     */
     public void GoToRegistrationOnClick(View view) {
         Intent intent = new Intent(Login.this, Register.class);
         intent.putExtra(IntentExtraName, gson.toJson(currentBooking));
@@ -215,11 +219,21 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
         }
     }
 
+    /**
+     *
+     * @param email
+     * @return
+     */
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
+    /**
+     *
+     * @param password
+     * @return
+     */
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;

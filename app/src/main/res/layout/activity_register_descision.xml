@@ -10,6 +10,8 @@
     android:weightSum="1"
     tools:context="fhdw.hotel.Activity.room_descision">
 
+    <!-- this activity is shown in a dialog window-->
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -19,6 +21,7 @@
         android:textSize="18dip"
         android:typeface="sans" />
 
+    <!-- go to login activity-->
     <Button
         android:id="@+id/goOnWithLogin"
         android:layout_width="match_parent"
@@ -26,6 +29,7 @@
         android:onClick="GoToLoginView"
         android:text="@string/menu_action_login" />
 
+    <!-- go on with booking without registration-->
     <Button
         android:id="@+id/goOnWithoutRegister"
         android:layout_width="match_parent"
@@ -33,6 +37,7 @@
         android:onClick="GoToBookingOnClick"
         android:text="@string/btn_goto_booking" />
 
+    <!-- go to Registration-->
     <Button
         android:id="@+id/btn_goto_booking"
         android:layout_width="match_parent"

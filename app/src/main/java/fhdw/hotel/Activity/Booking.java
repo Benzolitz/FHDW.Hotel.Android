@@ -50,6 +50,10 @@ public class Booking extends Activity {
     private EditText txtBillingPostalcode;
     private EditText txtBillingCity;
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
@@ -124,6 +128,12 @@ public class Booking extends Activity {
         };
     }
 
+    /**
+     * check all nput fields for the right inputs
+     *
+     * @param view
+     * @throws ParseException
+     */
     public void OnClickBooking(View view) throws ParseException {
         Address contactAddress = new Address();
         Address billingAddress = new Address();

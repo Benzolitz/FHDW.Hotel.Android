@@ -28,18 +28,30 @@ public class RegisterDescision extends Activity{
 
     }
 
+    /**
+     * Listener for the Login button
+     * @param view
+     */
     public void GoToLoginView(View view) {
         Intent intent = new Intent(RegisterDescision.this, Login.class);
         intent.putExtra(IntentExtraName, gson.toJson(currentBooking));
         startActivity(intent);
     }
 
+    /**
+     * Listener for Registration button
+     * @param view
+     */
     public void GoToRegistrationSiteOnClick(View view) {
         Intent intent = new Intent(RegisterDescision.this, Register.class);
         intent.putExtra(IntentExtraName, gson.toJson(currentBooking));
         startActivity(intent);
     }
 
+    /**
+     * Listener for the Booking-without-registration Button
+     * @param view
+     */
     public void GoToBookingOnClick(View view) {
         Intent intent = new Intent(RegisterDescision.this, Booking.class);
         intent.putExtra(IntentExtraName, gson.toJson(currentBooking));

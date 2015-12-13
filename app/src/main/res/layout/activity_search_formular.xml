@@ -2,6 +2,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
+    <!-- This activity collects informations for the hotel rooms search criteria -->
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -34,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <!-- spinner to select a hotel, will be filled dynamically with cities from server-->
                 <Spinner
                     android:id="@+id/spnCity"
                     android:layout_width="230dp"
@@ -43,6 +46,7 @@
                     android:layout_centerHorizontal="true">
                 </Spinner>
 
+                <!-- click to see hotel information of the selected hotel in the spinner above-->
                 <Button
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -62,6 +66,7 @@
                 android:text="Wählen sie die anzahl der Personen (max. 10)"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
+            <!-- select the amount of persons will be booking rooms-->
             <Spinner
                 android:id="@+id/spnPersonCount"
                 android:layout_width="match_parent"
@@ -81,6 +86,8 @@
                 android:text="@string/startDate" />
 
 
+            <!-- inputfields with datepicker shown onclick-->
+            <!-- arrival date-->
             <EditText
                 android:id="@+id/txtArrivalDate"
                 android:layout_width="match_parent"
@@ -99,6 +106,7 @@
                 android:labelFor="@+id/txtDepartureDate"
                 android:text="@string/endDate" />
 
+            <!-- departure date-->
             <EditText
                 android:id="@+id/txtDepartureDate"
                 android:layout_width="match_parent"
@@ -133,6 +141,7 @@
                         android:text="@string/einzelzimmer"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+                    <!-- select the amount of rooms to book-->
                     <EditText
                         android:id="@+id/txtSingleRoomCount"
                         android:layout_width="wrap_content"
@@ -196,6 +205,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
 
+        <!-- button to open dialog selection for next steps of the booking-->
         <Button
             android:id="@+id/search"
             android:layout_width="match_parent"

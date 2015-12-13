@@ -33,7 +33,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
+                <!-- input field for the user email-->
                 <AutoCompleteTextView
                     android:id="@+id/txtEmail"
                     android:layout_width="match_parent"
@@ -45,6 +45,7 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <!-- input field for the password-->
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -63,6 +64,7 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <!-- isign in button-->
             <Button
                 android:id="@+id/email_sign_in_button"
                 style="?android:textAppearanceSmall"
@@ -72,6 +74,7 @@
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
+            <!-- go to registration button-->
             <Button
                 android:id="@+id/register_btn"
                 style="?android:textAppearanceSmall"
